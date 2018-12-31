@@ -28,44 +28,26 @@ public class P {
         return prop;
     }
 
-    public static String get(String key) {
-        return getProp().get(key, null);
-    }
-
-    public static String get(String key, String defaultValue) {
-        return getProp().get(key, defaultValue);
-    }
-
-    public static Integer getInt(String key) {
-        return getInt(key, null);
-    }
-
-    public static Integer getInt(String key, Integer defaultValue) {
-        return getProp().getInt(key,defaultValue);
-    }
-
-    public static Long getLong(String key) {
-        return getLong(key, null);
-    }
-
-    public static Long getLong(String key, Long defaultValue) {
-        return getProp().getLong(key,defaultValue);
-    }
-
-    public static Boolean getBoolean(String key) {
-        return getBoolean(key, null);
-    }
-
-    public static Boolean getBoolean(String key, Boolean defaultValue){
-        return getProp().getBoolean(key,defaultValue);
-    }
 
 
     /**
      * 获取开发模式
      * @return
      */
-    public static boolean getDevMode(){
-        return getBoolean("mode.dev", false);
-    }
+    public final static boolean DEV_MODE = getProp().getBoolean("mode.dev", false);
+
+    /**
+     * 获取JFinal启动web时的监听端口
+     */
+    public final static int BIND_PORT = getProp().getInt("mode.port", 80);
+
+
+    /**
+     * 当前web服务对外提供的访问协议、域名、端口组成的URL
+     */
+    public final static String SERVER = String.format("%s://%s:%s",
+            getProp().get("server.scheme", "http"),
+            getProp().get("server.host", "127.0.0.1"),
+            getProp().getInt("server.port", 80)
+    );
 }

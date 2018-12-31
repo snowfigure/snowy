@@ -3,6 +3,7 @@ package ink.fdq.snowy.config;
 import com.jfinal.config.*;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import ink.fdq.snowy.config.handle.HtmlHandler;
 import ink.fdq.snowy.config.route.SnowyRoute;
 import ink.fdq.snowy.util.factory.P;
 
@@ -17,7 +18,7 @@ public class SnowyConfig extends JFinalConfig {
     public void configConstant(Constants me) {
 
         /*设置开发模式*/
-        me.setDevMode(P.getDevMode());
+        me.setDevMode(P.DEV_MODE);
 
         /*支持 Controller、Interceptor 之中使用 @Inject 注入业务层，并且自动实现 AOP*/
         me.setInjectDependency(true);
@@ -65,6 +66,6 @@ public class SnowyConfig extends JFinalConfig {
      */
     @Override
     public void configHandler(Handlers me) {
-
+        me.add(new HtmlHandler());
     }
 }
