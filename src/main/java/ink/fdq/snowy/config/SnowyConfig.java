@@ -1,6 +1,7 @@
 package ink.fdq.snowy.config;
 
 import com.jfinal.config.*;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import ink.fdq.snowy.config.handle.HtmlHandler;
@@ -10,6 +11,9 @@ import ink.fdq.snowy.util.factory.P;
 public class SnowyConfig extends JFinalConfig {
 
 
+    public static DruidPlugin createDruidPlugin() {
+        return new DruidPlugin(P.JDBC_URL, P.JDBC_USERNAME, P.JDBC_PASSWORD, P.JDBC_DRIVER);
+    }
     /**
      * 配置常量
      * @param me
@@ -48,6 +52,10 @@ public class SnowyConfig extends JFinalConfig {
      */
     @Override
     public void configPlugin(Plugins me) {
+        /**配置 druid 数据库连接池插件*/
+        DruidPlugin druidPlugin = createDruidPlugin();
+        me.add(druidPlugin);
+
 
     }
 

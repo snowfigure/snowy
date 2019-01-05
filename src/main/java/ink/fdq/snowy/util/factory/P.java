@@ -50,4 +50,29 @@ public class P {
             getProp().get("server.host", "127.0.0.1"),
             getProp().getInt("server.port", 80)
     );
+
+    /**
+     * JDBC驱动
+     */
+    public final static String JDBC_DRIVER = getProp().get("jdbc.driver");
+    /**
+     * JDBC数据库连接池
+     */
+    public final static String JDBC_URL = getProp().get("jdbc.url");
+    /**
+     * JDBC用户名
+     */
+    public final static String JDBC_USERNAME = getProp().get("jdbc.username");
+    /**
+     * JDBC密码
+     */
+    public final static String JDBC_PASSWORD = getProp().get("jdbc.password");
+
+    /**
+     * 数据库表前缀
+     */
+    public final static String JDBC_TABLE_PREFIX = getProp().get("jdbc.tablePrefix");
+
+
+
 }
