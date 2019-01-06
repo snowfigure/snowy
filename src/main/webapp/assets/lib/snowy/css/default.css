@@ -19,6 +19,9 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     display: none;
 }
 
+.right {
+    float: right;
+}
 /* start frame */
 #allPanel {
     height: auto;
@@ -35,7 +38,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     padding: 5px 0 5px;
     box-sizing: border-box;
     background-color: #fff;
-    margin-left: 100px;
+    margin-left: 80px;
 }
 
 /* end frame */
