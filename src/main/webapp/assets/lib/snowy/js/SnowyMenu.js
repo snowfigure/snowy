@@ -38,14 +38,16 @@ $.extend(SnowyMenu.prototype,{
     init : function(){
         var that = this;
         /** 初始化HTML*/
-        that.initHtml();
+        that.initHtml(that);
         /** 所有父节点绑定操作*/
-
+        that.bindClick(that);
 
     },
 
-    initHtml : function(){
-        var that = this;
+    /**
+     * 初始化html
+     */
+    initHtml : function(that){
         $.ajax({
             type:"POST",
             url : that.url,
@@ -85,5 +87,16 @@ $.extend(SnowyMenu.prototype,{
                 $("#" + that.id).html(html);
             }
         });
+    },
+
+    /**
+     * 有子节点的父节点绑定click操作
+     * @param that
+     */
+    bindClick : function (that) {
+        $("#" + that.id + " [class=tabs_parent]").click(function(){
+            console.log($(this).attr("id"));
+        });
     }
+
 });
