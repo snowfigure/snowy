@@ -5,5 +5,6 @@ package ink.fdq.snowy.util.factory;
  */
 public class S {
     public static final String VERSION = "0.0.5";
+    public static final String RES_VERSION = "version="  + VERSION;
 
 }

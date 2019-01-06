@@ -11,17 +11,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="robots" content="noindex,nofollow" />
 
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap/bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${Server}/assets/bootstrap/bootstrap-3.3.7/css/bootstrap.min.css">
 <!--[if lte IE 6]>
-<link rel="stylesheet" type="text/css" href="/assets/bsie/bootstrap/css/bootstrap-ie6.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/bsie/bootstrap/css/ie.css">
+<link rel="stylesheet" type="text/css" href="${Server}/assets/bsie/bootstrap/css/bootstrap-ie6.min.css">
+<link rel="stylesheet" type="text/css" href="${Server}/assets/bsie/bootstrap/css/ie.css">
 <![endif]-->
 
 <!--[if lte IE 9]>
-<script src="/assets/bsie/js/respond.min.js"></script>
-<script src="/assets/bsie/js/html5.js"></script>
+<script src="${Server}/assets/bsie/js/respond.min.js"></script>
+<script src="${Server}/assets/bsie/js/html5.js"></script>
 <![endif]-->
 
-<link rel="stylesheet" type="text/css" href="/assets/lib/snowy/css/default.css">
-<link rel="stylesheet" type="text/css" href="/assets/lib/snowy/css/icon.css">
-<link rel="stylesheet" type="text/css" href="/assets/lib/snowy/css/emotions.css">
+<link rel="stylesheet" type="text/css" href="${Server}/assets/lib/snowy/css/default.css?${ResVersion}">
+<link rel="stylesheet" type="text/css" href="${Server}/assets/lib/snowy/css/icon.css?${ResVersion}">
+<link rel="stylesheet" type="text/css" href="${Server}/assets/lib/snowy/css/emotions.css?${ResVersion}">
