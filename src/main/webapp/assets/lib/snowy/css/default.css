@@ -19,9 +19,15 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     display: none;
 }
 
+.block {
+    display :block;
+}
+
 .right {
     float: right;
 }
+
+
 /* start frame */
 #allPanel {
     height: auto;
@@ -135,12 +141,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 
 #tabs a:hover,
 #tabs a.tab-current,
-#tabs #tabToolsTitle.tab-current,
-#tabs #tabArticleTitle.tab-current,
-#tabs #tabSettingTitle.tab-current,
-#tabs #tabToolsTitle:hover,
-#tabs #tabSettingTitle:hover,
-#tabs #tabArticleTitle:hover {
+#tabs .tab-current{
     background-color: #28282e;
     color: #1fb5ad;
 }

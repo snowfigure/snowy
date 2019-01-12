@@ -39,8 +39,6 @@ $.extend(SnowyMenu.prototype,{
         var that = this;
         /** 初始化HTML*/
         that.initHtml(that);
-        /** 所有父节点绑定操作*/
-        that.bindClick(that);
 
     },
 
@@ -61,6 +59,7 @@ $.extend(SnowyMenu.prototype,{
 
                 menuHtml.push("<ul>");
                 var mainMenu = data.subMenu;
+                that.parents_id = [];
                 for(var i_main = 0; i_main < mainMenu.length; i_main++){
                     var main = mainMenu[i_main];
                     if(__IsEmpty(main.subMenu)){
@@ -68,8 +67,7 @@ $.extend(SnowyMenu.prototype,{
                             main.id, main.url, main.iconClass, main.name));
                     }else{
                         menuHtml.push(String.format("<li><div class='tabs_parent' id='{0}' class=''><span class='{1}'></span> {2} <span class='icon-chevron-down right'></span></div><ul class='none'>",
-                            main.id, main.iconClass, main.name));
-
+                            main.id + "_" + i_main, main.iconClass, main.name));
                         var subMenu = main.subMenu;
                         for(var j_main = 0; j_main < subMenu.length; j_main++){
                             var sub = subMenu[j_main];
@@ -85,18 +83,57 @@ $.extend(SnowyMenu.prototype,{
                 menuHtml.push("</ul>");
                 var html = menuHtml.join("");
                 $("#" + that.id).html(html);
+
+                /** 绑定点击操作*/
+                that.bindTabsClick(that);
             }
         });
     },
 
-    /**
-     * 有子节点的父节点绑定click操作
-     * @param that
-     */
-    bindClick : function (that) {
-        $("#" + that.id + " [class=tabs_parent]").click(function(){
-            console.log($(this).attr("id"));
+    bindTabsClick : function(that){
+        $("#" + that.id + " ul ").find("li").each(function(){
+            $(this).click(function(){
+
+                $(this).find("div").each(function(){
+                    if($(this).hasClass("tab-current")){
+                        $(this).removeClass("tab-current");
+                    }else{
+                        $(this).addClass("tab-current");
+                    }
+
+                    $(this).find("span").each(function(){
+                        if($(this).hasClass("icon-chevron-down")){
+                            $(this).removeClass("icon-chevron-down");
+                            $(this).addClass("icon-chevron-up");
+                            return;
+                        }
+
+                        if($(this).hasClass("icon-chevron-up")){
+                            $(this).removeClass("icon-chevron-up");
+                            $(this).addClass("icon-chevron-down");
+                        }
+                    });
+                });
+
+                $(this).find("ul").each(function(){
+                    $(this).parent().find("ul").each(function(){
+                        if($(this).hasClass("none")){
+                            $(this).removeClass("none");
+                            $(this).addClass("display");
+                        }else{
+                            $(this).removeClass("display");
+                            $(this).addClass("none");
+                        }
+                    });
+                });
+
+            });
         });
+
+
     }
+
+
+
 
 });
