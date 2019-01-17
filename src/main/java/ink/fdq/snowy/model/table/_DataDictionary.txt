@@ -27,25 +27,25 @@ Table: snowy_sys_resc
 ----------------+--------------+------+-----+---------+---------
 
 Table: snowy_sys_role
--------------+--------------+------+-----+---------+---------
- Field       | Type         | Null | Key | Default | Remarks 
--------------+--------------+------+-----+---------+---------
- id          | INT(10)      | NO   | PRI |         | id      
- name        | VARCHAR(50)  | YES  |     |         | 名称      
- type        | CHAR(1)      | YES  |     | 0       |  角色类型 默认：0 后台角色：1
- remark      | VARCHAR(100) | YES  |     |         | 备注      
- sort        | INT(10)      | YES  |     |         | 排序(不超过100)
- create_time | DATETIME(26) | YES  |     |         | 创建时间    
- is_enable   | CHAR(1)      | YES  |     | 0       | 是否停用 默认：0 停用：1
--------------+--------------+------+-----+---------+---------
+---------------+--------------+------+-----+---------+---------
+ Field         | Type         | Null | Key | Default | Remarks 
+---------------+--------------+------+-----+---------+---------
+ role_id       | INT(10)      | NO   | PRI |         | id      
+ role_name     | VARCHAR(50)  | YES  |     |         | 名称      
+ role_type     | CHAR(1)      | YES  |     | 0       |  角色类型 默认：0 后台角色：1
+ role_remark   | VARCHAR(100) | YES  |     |         | 备注      
+ role_sort     | INT(10)      | YES  |     |         | 排序(不超过100)
+ create_time   | DATETIME(26) | YES  |     |         | 创建时间    
+ enable_statue | CHAR(1)      | YES  |     | 0       | 是否停用 默认：0 停用：1
+---------------+--------------+------+-----+---------+---------
 
 Table: snowy_sys_role_resc
 ---------+---------+------+-----+---------+---------
  Field   | Type    | Null | Key | Default | Remarks 
 ---------+---------+------+-----+---------+---------
  id      | INT(10) | NO   | PRI |         | id      
- role_id | INT(10) | YES  |     |         | role id 
- resc_id | INT(10) | YES  |     |         | resc_id 
+ resc_id | INT(10) | YES  |     |         | id      
+ role_id | INT(10) | YES  |     |         | id      
 ---------+---------+------+-----+---------+---------
 
 Table: snowy_sys_role_user
@@ -53,27 +53,25 @@ Table: snowy_sys_role_user
  Field   | Type    | Null | Key | Default | Remarks 
 ---------+---------+------+-----+---------+---------
  id      | INT(10) | NO   | PRI |         | id      
- role_id | INT(10) | YES  |     |         | role id 
- user_id | INT(10) | YES  |     |         | user id 
+ role_id | INT(10) | YES  |     |         | id      
+ user_id | INT(10) | YES  |     |         | id      
 ---------+---------+------+-----+---------+---------
 
 Table: snowy_user_info
 ---------------------+---------------+------+-----+---------+---------
  Field               | Type          | Null | Key | Default | Remarks 
 ---------------------+---------------+------+-----+---------+---------
- id                  | INT(10)       | NO   | PRI |         | id      
+ user_id             | INT(10)       | NO   | PRI |         | id      
  user_name           | VARCHAR(80)   | YES  |     |         | 登录账号    
  nick_name           | VARCHAR(50)   | YES  |     |         | 昵称      
  real_name           | VARCHAR(30)   | YES  |     |         | 姓名      
- email               | VARCHAR(150)  | YES  |     |         | 个人网站    
- website             | VARCHAR(150)  | YES  |     |         | 个人网站    
- sha                 | VARCHAR(512)  | YES  |     |         | 随机盐值    
+ sha_value           | VARCHAR(512)  | YES  |     |         | 随机盐值    
  sha_password        | VARCHAR(1024) | YES  |     |         | 登录密码（盐值哈希后）
- gender              | CHAR(1)       | YES  |     | 0       | 性别 默认：0（男） 女：1
- head_photo_path     | VARCHAR(150)  | YES  |     |         | 头像路径    
- signature           | VARCHAR(255)  | YES  |     |         | 个性签名    
- user_status         | CHAR(1)       | YES  |     | 1       | 是否停用 默认：1 停用：2
- user_type           | CHAR(1)       | YES  |     | 0       | 用户类型 默认：0（普通用户） 管理员：1
+ user_email          | VARCHAR(150)  | YES  |     |         | 个人网站    
+ user_avatar         | VARCHAR(512)  | YES  |     |         | 头像路径    
+ user_signature      | VARCHAR(255)  | YES  |     |         | 个性签名    
+ login_status        | CHAR(1)       | YES  |     | 0       | 是否登录状态 默认：0 在线：1
+ user_status         | INT(10)       | YES  |     | 1       | 用户状态 0：新注册，不可用；1：注册可用状态；2：连续登陆错误，禁止使用；3：多地异常登陆，禁止使用；9：用户被删除，禁止使用。
  create_time         | DATETIME(26)  | YES  |     |         | 创建时间    
  update_time         | DATETIME(26)  | YES  |     |         | 更新时间    
  last_login_time     | DATETIME(26)  | YES  |     |         | 最后登录时间  

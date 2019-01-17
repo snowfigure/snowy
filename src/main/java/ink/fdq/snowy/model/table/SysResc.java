@@ -1,6 +1,7 @@
 package ink.fdq.snowy.model.table;
 
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.SqlPara;
 import ink.fdq.snowy.model.table.base.BaseSysResc;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class SysResc extends BaseSysResc<SysResc> {
     public final static String  PAGE_CACHE = "PAGE_CACHE_" + TABLE_NAME.toUpperCase();
     public final static String  FIND_CACHE = "FIND_CACHE_" + TABLE_NAME.toUpperCase();
 
-	
+	public static final SysResc dao = new SysResc().dao();
 
 	/**
      * 查询所有数据（不建议使用）
@@ -38,6 +39,11 @@ public class SysResc extends BaseSysResc<SysResc> {
         return super.find(SQL_SELECT_FROM);
     }
 
+    public List<SysResc> findByPid(int pid){
+        String sql = SQL_SELECT_FROM + " where resc_pid= ? and enable_status = ?";
+
+        return dao.find(sql, pid, 0);
+    }
     /**
      * 分页查询
      * @param pageNumber 页码，必须大于0

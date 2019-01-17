@@ -28,7 +28,7 @@ public class SysRoleResc extends BaseSysRoleResc<SysRoleResc> {
     public final static String  PAGE_CACHE = "PAGE_CACHE_" + TABLE_NAME.toUpperCase();
     public final static String  FIND_CACHE = "FIND_CACHE_" + TABLE_NAME.toUpperCase();
 
-	
+	public static final SysRoleResc dao = new SysRoleResc().dao();
 
 	/**
      * 查询所有数据（不建议使用）

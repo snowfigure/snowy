@@ -1,12 +1,12 @@
 drop table if exists sys_resc;
 
-drop table if exists sys_role;
+drop table if exists snowy_sys_role;
 
-drop table if exists sys_role_resc;
+drop table if exists snowy_sys_role_resc;
 
-drop table if exists sys_role_user;
+drop table if exists snowy_sys_role_user;
 
-drop table if exists user_info;
+drop table if exists snowy_user_info;
 
 /*==============================================================*/
 /* Table: snowy_sys_resc                                              */

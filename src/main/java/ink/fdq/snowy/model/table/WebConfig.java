@@ -28,7 +28,7 @@ public class WebConfig extends BaseWebConfig<WebConfig> {
     public final static String  PAGE_CACHE = "PAGE_CACHE_" + TABLE_NAME.toUpperCase();
     public final static String  FIND_CACHE = "FIND_CACHE_" + TABLE_NAME.toUpperCase();
 
-	
+	public static final WebConfig dao = new WebConfig().dao();
 
 	/**
      * 查询所有数据（不建议使用）

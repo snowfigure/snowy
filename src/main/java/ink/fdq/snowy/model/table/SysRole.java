@@ -28,7 +28,7 @@ public class SysRole extends BaseSysRole<SysRole> {
     public final static String  PAGE_CACHE = "PAGE_CACHE_" + TABLE_NAME.toUpperCase();
     public final static String  FIND_CACHE = "FIND_CACHE_" + TABLE_NAME.toUpperCase();
 
-	
+	public static final SysRole dao = new SysRole().dao();
 
 	/**
      * 查询所有数据（不建议使用）

@@ -1,11 +1,13 @@
 package ink.fdq.snowy.config;
 
 import com.jfinal.config.*;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import ink.fdq.snowy.config.handle.HtmlHandler;
 import ink.fdq.snowy.config.route.SnowyRoute;
+import ink.fdq.snowy.model.table._MappingKit;
 import ink.fdq.snowy.util.factory.P;
 
 public class SnowyConfig extends JFinalConfig {
@@ -55,6 +57,13 @@ public class SnowyConfig extends JFinalConfig {
         /**配置 druid 数据库连接池插件*/
         DruidPlugin druidPlugin = createDruidPlugin();
         me.add(druidPlugin);
+
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+        arp.setDevMode(P.DEV_MODE);
+        arp.setShowSql(P.DEV_MODE);
+        _MappingKit.mapping(arp);
+
+        me.add(arp);
     }
 
     /**
@@ -73,5 +82,15 @@ public class SnowyConfig extends JFinalConfig {
     @Override
     public void configHandler(Handlers me) {
         me.add(new HtmlHandler());
+    }
+
+    @Override
+    public void afterJFinalStart() {
+        super.afterJFinalStart();
+    }
+
+    @Override
+    public void beforeJFinalStop() {
+        super.beforeJFinalStop();
     }
 }
