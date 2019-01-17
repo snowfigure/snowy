@@ -3,11 +3,6 @@ body, input, textarea {
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;;
 }
 
-html, body {
-    color: #767676;
-    background: #f1f2f7;
-    font-size: 13px;
-}
 
 html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     margin: 0;
@@ -44,7 +39,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     padding: 5px 0 5px;
     box-sizing: border-box;
     background-color: #fff;
-    margin-left: 80px;
+    margin-left: 160px;
 }
 
 /* end frame */
@@ -55,7 +50,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     position: fixed;
     box-shadow: 1px 0 3px rgba(0, 0, 0, .15);
     width: 100%;
-    margin-left: 80px;
+    margin-left: 160px;
     top: 0;
     background-color: #fff;
     z-index: 80;
@@ -95,8 +90,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     width: 25px;
     border-radius: 20px;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: no-repeat center center;
     float: left;
     margin: 3px 6px 0 0;
 }
@@ -104,31 +98,31 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 /* end top-nav */
 
 /* start first tab */
-#tabs {
+#nav-bar {
     height: 100%;
     min-height: 468px;
-    width: 80px;
+    width: 160px;
     position: fixed;
     top: 0;
-    background-color: #32323a;
+    background-color: #2A3F54;
     overflow: hidden;
 }
 
-#tabs ul {
+#nav-bar ul {
     list-style: none;
-    width: 100px;
+    width: 180px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
-#tabs li {
+#nav-bar li {
     margin-left: 0px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 5px;
 }
 
-#tabs li > div > a,
-#tabs .tabs_parent{
-    color: #aeb2b7;
+#nav-bar li > div > a,
+#nav-bar .nav-bar-parent{
+    color: #FFFFFF;
     display: block;
     text-decoration: none;
     letter-spacing: 1px;
@@ -139,79 +133,90 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     cursor: pointer;
 }
 
-#tabs a:hover,
-#tabs a.tab-current,
-#tabs .tab-current{
-    background-color: #28282e;
-    color: #1fb5ad;
+
+
+#nav-bar a:hover,
+#nav-bar a.nav-bar-current,
+#nav-bar .nav-bar-current{
+    color:#FFFFFF;
+    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
+    background: linear-gradient(#334556,#2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;
+    border-left: 5px solid #1ABB9C;
 }
 
-#tabs li li {
+#nav-bar .nav-bar-right-span{
+    margin-left: 30px;
+}
+
+#nav-bar .nav-bar-left-span{
+    margin-left: 5px;
+    margin-right: 10px;
+}
+#nav-bar .nav-bar-current .nav-bar-left-span{
+    margin-left: 0px;
+}
+
+
+#nav-bar li li {
     border-bottom: 0;
 }
 
 
-#tabs li li > div > a {
+#nav-bar li li > div > a {
     padding: 10px 0 25px 30px;
     line-height: 15px;
     height: 15px;
-    background-color: #28282e;
 }
 
-#tabs li li > div > a:hover,
-#tabs li li > div > a.tab-current {
-    background-color: #202025;
-}
 
-#tabs .commentIcon, #tabs .postIcon, #tabs .preferenceIcon, #tabs .usersIcon,
-#tabs .aboutIcon {
-    display: none;
-}
 
-#tabs .icon-chevron-up,
-#tabs .icon-chevron-down {
-    margin-right: 10px;
-}
+/* end first nav-bar */
 
-/* end first tabs */
-
-/* start sub tabs */
-.sub-tabs {
-    background-color: #e0e1e7;
+/* start sub nav-bar */
+#nav-bar .sub-nav-bar {
     border-radius: 4px 4px 0 0;
     overflow: hidden;
 }
 
-.sub-tabs ul {
-    float: left;
+#nav-bar .sub-nav-bar ul {
     list-style: none outside none;
     margin-right: 24px;
 }
 
-.sub-tabs li {
-    float: left;
+#nav-bar .sub-nav-bar li {
     margin: 0;
 }
 
-.sub-tabs li a {
-    border-right: 1px solid #e0e1e7;
-    color: #898989;
+#nav-bar .sub-nav-bar li a {
     display: block;
     line-height: 18px;
-    padding: 20px 15px;
     text-decoration: none;
+    margin-left: 10px;
 }
 
-.sub-tabs .tab-current, .sub-tabs .tab-current:hover,
-.sub-tabs a:hover {
-    background-color: #FFFFFF;
-    color: #1fb5ad;
+#nav-bar .sub-nav-bar a:hover,
+#nav-bar .sub-nav-bar a.sub-nav-bar-current,
+#nav-bar .sub-nav-bar .sub-nav-bar-current{
+    color:#FFFFFF;
+    margin-left: 5px;
+    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
+    background: linear-gradient(#334556,#2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;
+    border-left: 2px solid #1ABB9C;
 }
 
-.sub-tabs-main {
+#nav-bar .sub-nav-bar-main {
     background-color: #FFFFFF;
     padding: 15px;
     border-radius: 0 0 4px 4px;
 }
 
-/* end preference tabs*/
+
+/* end preference nav-bar*/
+
+#main_container {
+    margin: 50px 0 0 160px;
+    padding: 15px;
+    min-height: 100px;
+}

@@ -23,5 +23,3 @@
 <![endif]-->
 
 <link rel="stylesheet" type="text/css" href="${Server}/assets/lib/snowy/css/default.css?${ResVersion}">
-<link rel="stylesheet" type="text/css" href="${Server}/assets/lib/snowy/css/icon.css?${ResVersion}">
-<link rel="stylesheet" type="text/css" href="${Server}/assets/lib/snowy/css/emotions.css?${ResVersion}">

@@ -55,8 +55,6 @@ public class SnowyConfig extends JFinalConfig {
         /**配置 druid 数据库连接池插件*/
         DruidPlugin druidPlugin = createDruidPlugin();
         me.add(druidPlugin);
-
-
     }
 
     /**

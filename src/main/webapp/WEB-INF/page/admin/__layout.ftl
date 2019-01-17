@@ -12,11 +12,11 @@
          <#include "/WEB-INF/page/admin/__top_menu.ftl" />
     </div>
 
-    <div id="tabs">
+    <div id="nav-bar">
 
     </div>
 
-    <div class="tabsPanel">
+    <div id="main_container">
         <#nested>
     </div>
 
@@ -30,6 +30,6 @@
     <#include "/WEB-INF/page/admin/__footer.ftl" />
 <script type="text/javascript">
     var snowy = new SnowyAdmin("${Server}");
-    snowy.setMenu("tabs", "${Server}/admin/api/menu/get").initMenu();
+    snowy.setMenu("nav-bar", "${Server}/admin/api/menu/get").initMenu();
 </script>
 </#macro>

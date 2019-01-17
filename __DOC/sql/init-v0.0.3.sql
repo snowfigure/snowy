@@ -1,17 +1,20 @@
 CREATE TABLE `snowy_user_info` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-  `username` varchar(80) default NULL COMMENT '登录账号',
+  `user_name` varchar(80) default NULL COMMENT '登录账号',
+  `nick_name` varchar(50) default NULL COMMENT '昵称',
+  `real_name` varchar(30) default NULL COMMENT '姓名',
+  `email` varchar(150) default NULL COMMENT '个人网站',
+  `website` varchar(150) default NULL COMMENT '个人网站',
   `sha` varchar(512) default NULL COMMENT '随机盐值',
   `sha_password` varchar(1024) default NULL COMMENT '登录密码（盐值哈希后）',
-  `nickname` varchar(50) default NULL COMMENT '昵称',
-  `real_name` varchar(30) default NULL COMMENT '姓名',
+
   `gender` char(1) default '0' COMMENT '性别 默认：0（男） 女：1',
-  `birthday` date default NULL COMMENT '生日',
   `head_photo_path` varchar(150) default NULL COMMENT '头像路径',
   `signature` varchar(255) default NULL COMMENT '个性签名',
-  `email` varchar(150) default NULL COMMENT '个人网站',
-  `type` char(1) default '0' COMMENT '用户类型 默认：0（普通用户） 管理员：1',
-  `login_status` char(1) default '0' COMMENT '是否登录状态 默认：0 在线：1',
+
+  `user_status` char(1) default '1' COMMENT '是否停用 默认：1 停用：2',
+  `user_type` char(1) default '0' COMMENT '用户类型 默认：0（普通用户） 管理员：1',
+
   `create_time` datetime default NULL COMMENT '创建时间',
   `update_time` datetime default NULL COMMENT '更新时间',
   `last_login_time` datetime default NULL COMMENT '最后登录时间',
@@ -19,10 +22,8 @@ CREATE TABLE `snowy_user_info` (
   `last_login_country` varchar(32) default NULL,
   `last_login_province` varchar(32) default NULL,
   `last_login_city` varchar(32) default NULL,
-  `delete_status` char(1) default '0' COMMENT '删除状态 默认：0 删除：1',
-  `enable` char(1) default '1' COMMENT '是否停用 默认：1 停用：2',
-  `reg_valid` varchar(256) default NULL COMMENT '注册状态验证码',
-  `forget_valid` varchar(256) default NULL COMMENT '忘记密码验证码',
+
+
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
