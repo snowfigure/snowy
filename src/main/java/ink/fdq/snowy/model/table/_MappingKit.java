@@ -17,6 +17,10 @@ public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping(ChinaAreas.TABLE_NAME, ChinaAreas.PK_NAME, ChinaAreas.class);
+		arp.addMapping(SysResc.TABLE_NAME, SysResc.PK_NAME, SysResc.class);
+		arp.addMapping(SysRole.TABLE_NAME, SysRole.PK_NAME, SysRole.class);
+		arp.addMapping(SysRoleResc.TABLE_NAME, SysRoleResc.PK_NAME, SysRoleResc.class);
+		arp.addMapping(SysRoleUser.TABLE_NAME, SysRoleUser.PK_NAME, SysRoleUser.class);
 		arp.addMapping(UserInfo.TABLE_NAME, UserInfo.PK_NAME, UserInfo.class);
 		arp.addMapping(WebConfig.TABLE_NAME, WebConfig.PK_NAME, WebConfig.class);
 	}

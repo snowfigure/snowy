@@ -1,97 +1,112 @@
-CREATE TABLE `snowy_user_info` (
-  `id` int(11) NOT NULL auto_increment COMMENT 'id',
-  `user_name` varchar(80) default NULL COMMENT '登录账号',
-  `nick_name` varchar(50) default NULL COMMENT '昵称',
-  `real_name` varchar(30) default NULL COMMENT '姓名',
-  `email` varchar(150) default NULL COMMENT '个人网站',
-  `website` varchar(150) default NULL COMMENT '个人网站',
-  `sha` varchar(512) default NULL COMMENT '随机盐值',
-  `sha_password` varchar(1024) default NULL COMMENT '登录密码（盐值哈希后）',
+drop table if exists sys_resc;
 
-  `gender` char(1) default '0' COMMENT '性别 默认：0（男） 女：1',
-  `head_photo_path` varchar(150) default NULL COMMENT '头像路径',
-  `signature` varchar(255) default NULL COMMENT '个性签名',
+drop table if exists sys_role;
 
-  `user_status` char(1) default '1' COMMENT '是否停用 默认：1 停用：2',
-  `user_type` char(1) default '0' COMMENT '用户类型 默认：0（普通用户） 管理员：1',
+drop table if exists sys_role_resc;
 
-  `create_time` datetime default NULL COMMENT '创建时间',
-  `update_time` datetime default NULL COMMENT '更新时间',
-  `last_login_time` datetime default NULL COMMENT '最后登录时间',
-  `last_login_ip` varchar(15) default NULL COMMENT '最后登录IP',
-  `last_login_country` varchar(32) default NULL,
-  `last_login_province` varchar(32) default NULL,
-  `last_login_city` varchar(32) default NULL,
+drop table if exists sys_role_user;
 
+drop table if exists user_info;
 
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `snowy_web_config` (
-  `id` int(11) NOT NULL auto_increment COMMENT 'id',
-  `key` varchar(100) default NULL COMMENT 'key 键',
-  `value` varchar(150) default NULL COMMENT 'value 值',
-  `description` varchar(255) default NULL COMMENT 'description 描述',
-  `create_time` datetime default NULL COMMENT '创建时间',
-  `update_time` datetime default NULL COMMENT '更新时间',
-  `is_system` char(1) default '0' COMMENT '是否系统配置 否：0 是：1',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `snowy_china_areas` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `p_id` int(11) unsigned NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `zip_code` varchar(6) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='地区信息';
-
-
-CREATE TABLE snowy_sys_resc
+/*==============================================================*/
+/* Table: snowy_sys_resc                                              */
+/*==============================================================*/
+create table snowy_sys_resc
 (
-    id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
-    pid int(11) COMMENT '父id',
-    name varchar(50) COMMENT '名称',
-    iconCls varchar(32),
-    level int(1) COMMENT '层级(不超过10层)',
-    sort int(2) COMMENT '排序(不超过100)',
-    remark varchar(100) COMMENT '备注',
-    type char(1) DEFAULT '0' COMMENT '权限类型 默认：0 后台权限：1',
-    function_type int(11) COMMENT '功能类型 从数据字典获得',
-    url varchar(150) DEFAULT '#' COMMENT 'URL',
-    rel varchar(50) DEFAULT '#' COMMENT 'DWZ定制',
-    target varchar(10) DEFAULT '#',
-    width varchar(4),
-    height varchar(4),
-    create_time datetime COMMENT '创建时间',
-    is_enable char(1) DEFAULT '0' COMMENT '是否停用 默认：0 停用：1'
-);
+   resc_id              int(11) not null auto_increment comment 'id',
+   resc_pid             int(11) default NULL comment '父id',
+   resc_name            varchar(50) default NULL comment '对外显示名称（支持多语言情况下，使用字典参数）',
+   resc_url             varchar(150) default '#' comment '访问路径（不含IP、端口、参数）',
+   resc_level           int(1) default NULL comment '层级(不超过10层)',
+   resc_sort            int(2) default NULL comment '排序(不超过100)',
+   resc_type            char(1) default '0' comment '权限类型 默认：0 后台权限：1',
+   resc_icon_name       varchar(32) default NULL,
+   resc_html_id         varchar(32) default NULL comment '资源显示的ID，如果为空，则使用nav_resc_pid_resc_id进行拼接',
+   resc_remark          varchar(100) default NULL comment '备注',
+   create_time          datetime default NULL comment '创建时间',
+   enable_status        char(1) default '0' comment '是否停用 默认：0 停用：1',
+   primary key (resc_id)
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE snowy_sys_role
+/*==============================================================*/
+/* Table: snowy_sys_role                                              */
+/*==============================================================*/
+create table snowy_sys_role
 (
-    id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
-    name varchar(50) COMMENT '名称',
-    type char(1) DEFAULT '0' COMMENT ' 角色类型 默认：0 后台角色：1',
-    remark varchar(100) COMMENT '备注',
-    sort int(2) COMMENT '排序(不超过100)',
-    create_time datetime COMMENT '创建时间',
-    is_enable char(1) DEFAULT '0' COMMENT '是否停用 默认：0 停用：1'
-);
-CREATE TABLE snowy_sys_role_resc
-(
-    id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
-    role_id int(11) COMMENT 'role id',
-    resc_id int(11) COMMENT 'resc_id'
-);
+   role_id              int(11) not null auto_increment comment 'id',
+   role_name            varchar(50) default NULL comment '名称',
+   role_type            char(1) default '0' comment ' 角色类型 默认：0 后台角色：1',
+   role_remark          varchar(100) default NULL comment '备注',
+   role_sort            int(2) default NULL comment '排序(不超过100)',
+   create_time          datetime default NULL comment '创建时间',
+   enable_statue        char(1) default '0' comment '是否停用 默认：0 停用：1',
+   primary key (role_id)
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE snowy_sys_role_user
+/*==============================================================*/
+/* Table: snowy_sys_role_resc                                         */
+/*==============================================================*/
+create table snowy_sys_role_resc
 (
-    id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
-    role_id int(11) COMMENT 'role id',
-    user_id int(11) COMMENT 'user id'
-);
+   id                   int(11) not null auto_increment comment 'id',
+   resc_id              int(11) comment 'id',
+   role_id              int(11) comment 'id',
+   primary key (id)
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*==============================================================*/
+/* Table: snowy_sys_role_user                                         */
+/*==============================================================*/
+create table snowy_sys_role_user
+(
+   id                   int(11) not null auto_increment comment 'id',
+   role_id              int(11) comment 'id',
+   user_id              int(11) comment 'id',
+   primary key (id)
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*==============================================================*/
+/* Table: snowy_user_info                                             */
+/*==============================================================*/
+create table snowy_user_info
+(
+   user_id              int(11) not null auto_increment comment 'id',
+   user_name            varchar(80) default NULL comment '登录账号',
+   nick_name            varchar(50) default NULL comment '昵称',
+   real_name            varchar(30) default NULL comment '姓名',
+   sha_value            varchar(512) default NULL comment '随机盐值',
+   sha_password         varchar(1024) default NULL comment '登录密码（盐值哈希后）',
+   user_email           varchar(150) default NULL comment '个人网站',
+   user_avatar          varchar(512) default NULL comment '头像路径',
+   user_signature       varchar(255) default NULL comment '个性签名',
+   login_status         char(1) default '0' comment '是否登录状态 默认：0 在线：1',
+   user_status          int default 1 comment '用户状态 0：新注册，不可用；1：注册可用状态；2：连续登陆错误，禁止使用；3：多地异常登陆，禁止使用；9：用户被删除，禁止使用。',
+   create_time          datetime default NULL comment '创建时间',
+   update_time          datetime default NULL comment '更新时间',
+   last_login_time      datetime default NULL comment '最后登录时间',
+   last_login_ip        varchar(15) default NULL comment '最后登录IP',
+   last_login_country   varchar(32) default NULL,
+   last_login_province  varchar(32) default NULL,
+   last_login_city      varchar(32) default NULL,
+   primary key (user_id)
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table snowy_sys_role_resc add constraint FK_Reference_1 foreign key (resc_id)
+      references snowy_sys_resc (resc_id) on delete restrict on update restrict;
+
+alter table snowy_sys_role_resc add constraint FK_Reference_2 foreign key (role_id)
+      references snowy_sys_role (role_id) on delete restrict on update restrict;
+
+alter table snowy_sys_role_user add constraint FK_Reference_3 foreign key (role_id)
+      references snowy_sys_role (role_id) on delete restrict on update restrict;
+
+alter table snowy_sys_role_user add constraint FK_Reference_4 foreign key (user_id)
+      references snowy_user_info (user_id) on delete restrict on update restrict;
 
 
 

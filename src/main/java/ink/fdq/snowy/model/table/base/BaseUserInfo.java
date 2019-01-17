@@ -35,22 +35,6 @@ public abstract class BaseUserInfo<M extends BaseUserInfo<M>> extends Model<M> i
 		return getStr("user_name");
 	}
 
-	public void setSha(java.lang.String sha) {
-		set("sha", sha);
-	}
-	
-	public java.lang.String getSha() {
-		return getStr("sha");
-	}
-
-	public void setShaPassword(java.lang.String shaPassword) {
-		set("sha_password", shaPassword);
-	}
-	
-	public java.lang.String getShaPassword() {
-		return getStr("sha_password");
-	}
-
 	public void setNickName(java.lang.String nickName) {
 		set("nick_name", nickName);
 	}
@@ -67,20 +51,44 @@ public abstract class BaseUserInfo<M extends BaseUserInfo<M>> extends Model<M> i
 		return getStr("real_name");
 	}
 
+	public void setEmail(java.lang.String email) {
+		set("email", email);
+	}
+	
+	public java.lang.String getEmail() {
+		return getStr("email");
+	}
+
+	public void setWebsite(java.lang.String website) {
+		set("website", website);
+	}
+	
+	public java.lang.String getWebsite() {
+		return getStr("website");
+	}
+
+	public void setSha(java.lang.String sha) {
+		set("sha", sha);
+	}
+	
+	public java.lang.String getSha() {
+		return getStr("sha");
+	}
+
+	public void setShaPassword(java.lang.String shaPassword) {
+		set("sha_password", shaPassword);
+	}
+	
+	public java.lang.String getShaPassword() {
+		return getStr("sha_password");
+	}
+
 	public void setGender(java.lang.String gender) {
 		set("gender", gender);
 	}
 	
 	public java.lang.String getGender() {
 		return getStr("gender");
-	}
-
-	public void setBirthday(java.util.Date birthday) {
-		set("birthday", birthday);
-	}
-	
-	public java.util.Date getBirthday() {
-		return get("birthday");
 	}
 
 	public void setHeadPhotoPath(java.lang.String headPhotoPath) {
@@ -99,28 +107,20 @@ public abstract class BaseUserInfo<M extends BaseUserInfo<M>> extends Model<M> i
 		return getStr("signature");
 	}
 
-	public void setEmail(java.lang.String email) {
-		set("email", email);
+	public void setUserStatus(java.lang.String userStatus) {
+		set("user_status", userStatus);
 	}
 	
-	public java.lang.String getEmail() {
-		return getStr("email");
+	public java.lang.String getUserStatus() {
+		return getStr("user_status");
 	}
 
-	public void setType(java.lang.String type) {
-		set("type", type);
+	public void setUserType(java.lang.String userType) {
+		set("user_type", userType);
 	}
 	
-	public java.lang.String getType() {
-		return getStr("type");
-	}
-
-	public void setLoginStatus(java.lang.String loginStatus) {
-		set("login_status", loginStatus);
-	}
-	
-	public java.lang.String getLoginStatus() {
-		return getStr("login_status");
+	public java.lang.String getUserType() {
+		return getStr("user_type");
 	}
 
 	public void setCreateTime(java.util.Date createTime) {
@@ -177,38 +177,6 @@ public abstract class BaseUserInfo<M extends BaseUserInfo<M>> extends Model<M> i
 	
 	public java.lang.String getLastLoginCity() {
 		return getStr("last_login_city");
-	}
-
-	public void setDeleteStatus(java.lang.String deleteStatus) {
-		set("delete_status", deleteStatus);
-	}
-	
-	public java.lang.String getDeleteStatus() {
-		return getStr("delete_status");
-	}
-
-	public void setEnableStatus(java.lang.String enableStatus) {
-		set("enable_status", enableStatus);
-	}
-	
-	public java.lang.String getEnableStatus() {
-		return getStr("enable_status");
-	}
-
-	public void setRegValid(java.lang.String regValid) {
-		set("reg_valid", regValid);
-	}
-	
-	public java.lang.String getRegValid() {
-		return getStr("reg_valid");
-	}
-
-	public void setForgetValid(java.lang.String forgetValid) {
-		set("forget_valid", forgetValid);
-	}
-	
-	public java.lang.String getForgetValid() {
-		return getStr("forget_valid");
 	}
 
 }
