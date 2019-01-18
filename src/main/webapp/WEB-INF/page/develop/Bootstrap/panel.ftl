@@ -6,6 +6,9 @@
     <div id="panel-container">
 
     </div>
+</div>
+<div class="row-12">
+
     <pre>
         <code class="html">
  &lt;#include "/WEB-INF/page/admin/__layout.ftl" /&gt;
