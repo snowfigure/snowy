@@ -1,4 +1,4 @@
-package ink.fdq.snowy.core.Kits;
+package ink.fdq.snowy.core.kits;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

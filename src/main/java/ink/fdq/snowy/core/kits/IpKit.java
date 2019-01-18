@@ -20,7 +20,7 @@
  * Author: fengduqing
  **/
 
-package ink.fdq.snowy.core.Kits;
+package ink.fdq.snowy.core.kits;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;

@@ -1,4 +1,4 @@
-package ink.fdq.snowy.core.Kits;
+package ink.fdq.snowy.core.kits;
 
 /**
  * DES加密解密

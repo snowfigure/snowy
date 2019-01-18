@@ -1,4 +1,4 @@
-package ink.fdq.snowy.core.Kits;
+package ink.fdq.snowy.core.kits;
 
 /**
  * BASE64编码解码
