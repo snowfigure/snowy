@@ -5,6 +5,8 @@
 <script type="text/javascript" src="${Server}/assets/bsie/js/bootstrap-ie.js"></script>
 <![endif]-->
 
+<script src="${Server}/assets/lib/highlight/highlight.pack.js?${ResVersion}"></script>
+
 <script src="${Server}/assets/lib/snowy/js/global.js?${ResVersion}"></script>
 <script src="${Server}/assets/lib/snowy/js/base/Common.js?${ResVersion}"></script>
 <script src="${Server}/assets/lib/snowy/js/base/FormGroup.js?${ResVersion}"></script>
