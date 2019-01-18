@@ -3,6 +3,9 @@ body, input, textarea {
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;;
 }
 
+body {
+    background-color: #2A3F54;
+}
 
 html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     margin: 0;
@@ -52,7 +55,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     width: 100%;
     margin-left: 160px;
     top: 0;
-    background-color: #fff;
+    background-color: #EDEDED;
     z-index: 80;
 }
 
@@ -136,6 +139,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 
 
 #nav-bar a:hover,
+#nav-bar .nav-bar-parent:hover,
 #nav-bar a.nav-bar-current,
 #nav-bar .nav-bar-current{
     color:#FFFFFF;
@@ -215,8 +219,18 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 
 /* end preference nav-bar*/
 
-#main_container {
+#main-container {
     margin: 50px 0 0 160px;
     padding: 15px;
     min-height: 100px;
+    background-color: #F7F7F7;
+}
+
+.row-12{
+    background-color: #FFFFFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    padding: 15px;
 }

@@ -1,6 +1,7 @@
 <#include "/WEB-INF/page/admin/__layout.ftl" />
 
 <@layout >
+<div class="row-12">
  <table class="table table-bordered table-condensed table-hover">
 
      <thead>
@@ -1050,4 +1051,6 @@
      </tr>
      </tbody>
  </table>
+
+</div>
 </@layout >

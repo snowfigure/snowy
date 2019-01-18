@@ -16,8 +16,8 @@
 
     </div>
 
-    <div id="main_container">
-        <#nested>
+    <div id="main-container">
+           <#nested>
     </div>
 
     <div class="footer">
