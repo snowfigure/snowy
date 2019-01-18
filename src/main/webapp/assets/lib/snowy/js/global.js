@@ -57,3 +57,25 @@ var __IsEmpty = function(object){
 
     return false;
 };
+
+var __IsTrue = function(object){
+    if(__IsEmpty(object)){
+        return false;
+    }
+    if(true === object){
+        return true;
+    }
+
+    return false;
+};
+
+var __IsFalse = function(object){
+    if(__IsEmpty(object)){
+        return true;
+    }
+    if(false === object){
+        return true;
+    }
+
+    return false;
+};

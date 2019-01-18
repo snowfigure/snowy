@@ -6,6 +6,13 @@
 <![endif]-->
 
 <script src="${Server}/assets/lib/snowy/js/global.js?${ResVersion}"></script>
+<script src="${Server}/assets/lib/snowy/js/base/Common.js?${ResVersion}"></script>
+<script src="${Server}/assets/lib/snowy/js/base/FormGroup.js?${ResVersion}"></script>
+<script src="${Server}/assets/lib/snowy/js/base/Modal.js?${ResVersion}"></script>
+<script src="${Server}/assets/lib/snowy/js/base/Panel.js?${ResVersion}"></script>
+
+<script src="${Server}/assets/lib/snowy/js/DataTable.js?${ResVersion}"></script>
+<script src="${Server}/assets/lib/snowy/js/Tree.js?${ResVersion}"></script>
 <script src="${Server}/assets/lib/snowy/js/NavBar.js?${ResVersion}"></script>
 <script src="${Server}/assets/js/admin/admin.js?${ResVersion}"></script>
 

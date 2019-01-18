@@ -5,7 +5,7 @@ import ink.fdq.snowy.core.route.admin.AdminApiRoute;
 import ink.fdq.snowy.core.route.admin.AdminPageRoute;
 import ink.fdq.snowy.core.route.front.FrontApiRoute;
 import ink.fdq.snowy.core.route.front.FrontPageRoute;
-import ink.fdq.snowy.core.route.test.TestRoute;
+import ink.fdq.snowy.core.route.develop.DevelopRoute;
 import ink.fdq.snowy.core.factory.P;
 
 public class SnowyRoute {
@@ -17,7 +17,7 @@ public class SnowyRoute {
         me.add(new FrontPageRoute());
 
         if(P.DEV_MODE){
-            me.add(new TestRoute());
+            me.add(new DevelopRoute());
         }
     }
 }
