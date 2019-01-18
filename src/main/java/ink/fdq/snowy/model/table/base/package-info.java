@@ -1,1 +1,0 @@
-package ink.fdq.snowy.model.table.base;

@@ -1,8 +1,8 @@
 package ink.fdq.snowy;
 
 import com.jfinal.server.undertow.UndertowServer;
-import ink.fdq.snowy.config.SnowyConfig;
-import ink.fdq.snowy.util.factory.P;
+import ink.fdq.snowy.core.config.SnowyConfig;
+import ink.fdq.snowy.core.factory.P;
 
 public class App {
     /**
