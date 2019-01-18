@@ -14,7 +14,7 @@ $.extend(SnowyAdmin.prototype,{
      */
     setMenu : function(id,url){
         var that = this;
-        that.menu = new SnowyMenu(id,url);
+        that.menu = new NavBar(id,url);
         return that;
     },
 

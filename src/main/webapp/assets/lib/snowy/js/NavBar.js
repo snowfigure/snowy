@@ -29,12 +29,12 @@
  */
 
 
-var SnowyMenu = function(id, url){
+var NavBar = function(id, url){
     this.id = id;
     this.url = url;
 };
 
-$.extend(SnowyMenu.prototype,{
+$.extend(NavBar.prototype,{
     init : function(){
         var that = this;
         /** 初始化HTML*/

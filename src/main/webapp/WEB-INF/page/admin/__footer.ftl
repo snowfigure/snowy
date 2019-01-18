@@ -6,7 +6,6 @@
 <![endif]-->
 
 <script src="${Server}/assets/lib/snowy/js/global.js?${ResVersion}"></script>
-<script src="${Server}/assets/lib/snowy/js/snowy.js?${ResVersion}"></script>
-<script src="${Server}/assets/lib/snowy/js/SnowyMenu.js?${ResVersion}"></script>
+<script src="${Server}/assets/lib/snowy/js/NavBar.js?${ResVersion}"></script>
 <script src="${Server}/assets/js/admin/admin.js?${ResVersion}"></script>
 
