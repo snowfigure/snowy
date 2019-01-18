@@ -24,6 +24,7 @@ public class _MappingKit {
 		arp.addMapping(SysRoleResc.TABLE_NAME, SysRoleResc.PK_NAME, SysRoleResc.class);
 		arp.addMapping(SysRoleUser.TABLE_NAME, SysRoleUser.PK_NAME, SysRoleUser.class);
 		arp.addMapping(UserInfo.TABLE_NAME, UserInfo.PK_NAME, UserInfo.class);
+		arp.addMapping(WebConfig.TABLE_NAME, WebConfig.PK_NAME, WebConfig.class);
 	}
 }
 

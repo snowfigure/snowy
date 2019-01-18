@@ -24,8 +24,8 @@
         <jfinal.undertow.version>1.4</jfinal.undertow.version>
         <jfinal.cos.version>2017.5</jfinal.cos.version>
 
-        <!--db.mysql.version>5.1.44</db.mysql.version-->
-        <db.mysql.version>8.0.12</db.mysql.version>
+        <db.mysql.version>5.1.44</db.mysql.version>
+        <!--db.mysql.version>8.0.12</db.mysql.version-->
         <db.alibaba.druid.version>1.0.29</db.alibaba.druid.version>
 
         <freemarker.version>2.3.28</freemarker.version>
