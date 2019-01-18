@@ -8,6 +8,30 @@ Table: snowy_china_areas	Remarks: 地区信息
  zip_code | VARCHAR(6)       | NO   |     |         |         
 ----------+------------------+------+-----+---------+---------
 
+Table: snowy_dictionary	Remarks: 字典（含多语言、系统自定义配置等）
+-------------+--------------+------+-----+---------+---------
+ Field       | Type         | Null | Key | Default | Remarks 
+-------------+--------------+------+-----+---------+---------
+ id          | INT(10)      | NO   | PRI |         | id      
+ pid         | INT(10)      | YES  |     |         | 父节点ID   
+ key         | VARCHAR(100) | YES  |     |         | key 键   
+ value       | VARCHAR(512) | YES  |     |         | value 值(默认中文)
+ value_en_us | VARCHAR(256) | YES  |     |         | /*value值（对应英文）*/
+ description | VARCHAR(255) | YES  |     |         | description 描述
+ create_time | DATETIME(26) | YES  |     |         | 创建时间    
+ update_time | DATETIME(26) | YES  |     |         | 更新时间    
+-------------+--------------+------+-----+---------+---------
+
+Table: snowy_sys_icon	Remarks: 系统支持的图标
+-------+-------------+------+-----+---------+---------
+ Field | Type        | Null | Key | Default | Remarks 
+-------+-------------+------+-----+---------+---------
+ id    | INT(10)     | NO   | PRI |         | 当前ID，如果是父节点，那么为ICON集合的分类（如Bootstrap等）
+ pid   | INT(10)     | NO   |     |         | 父节点ID   
+ name  | VARCHAR(64) | YES  |     |         |         
+ value | VARCHAR(64) | YES  |     |         |         
+-------+-------------+------+-----+---------+---------
+
 Table: snowy_sys_resc
 ----------------+--------------+------+-----+---------+---------
  Field          | Type         | Null | Key | Default | Remarks 
@@ -80,17 +104,4 @@ Table: snowy_user_info
  last_login_province | VARCHAR(32)   | YES  |     |         |         
  last_login_city     | VARCHAR(32)   | YES  |     |         |         
 ---------------------+---------------+------+-----+---------+---------
-
-Table: snowy_web_config
--------------+--------------+------+-----+---------+---------
- Field       | Type         | Null | Key | Default | Remarks 
--------------+--------------+------+-----+---------+---------
- id          | INT(10)      | NO   | PRI |         | id      
- key         | VARCHAR(100) | YES  |     |         | key 键   
- value       | VARCHAR(150) | YES  |     |         | value 值 
- description | VARCHAR(255) | YES  |     |         | description 描述
- create_time | DATETIME(26) | YES  |     |         | 创建时间    
- update_time | DATETIME(26) | YES  |     |         | 更新时间    
- is_system   | CHAR(1)      | YES  |     | 0       | 是否系统配置 否：0 是：1
--------------+--------------+------+-----+---------+---------
 

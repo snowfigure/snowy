@@ -1,3 +1,28 @@
+CREATE TABLE snowy.snowy_dictionary
+(
+    id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+    pid int(11) COMMENT '父节点ID',
+    `key` varchar(100) COMMENT 'key 键',
+    value varchar(512) COMMENT 'value 值(默认中文)',
+    value_en_us varchar(256) COMMENT '/*value值（对应英文）*/',
+    description varchar(255) COMMENT 'description 描述',
+    create_time datetime COMMENT '创建时间',
+    update_time datetime COMMENT '更新时间'
+);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (1, -1, 'WebConfig', '系统配置', 'Web Config', null, null, null);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (2, -1, 'i18n', '国际化', 'i18n Properties', null, null, null);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (201, 2, 'Label', '标签', 'Label', null, null, null);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (202, 2, 'Button', '按钮', 'Button', null, null, null);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (203, 2, 'Menu', '菜单', 'Menu', null, null, null);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (204, 2, 'Tip', '提示语', 'Tip Msg', null, null, null);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (1001, 1, 'webName', 'Snowy JFinal 网站基础框架', 'Basic Web Frame With JFinal', '网站名称', '2018-12-02 09:55:13', '2018-12-04 14:03:47');
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (1002, 1, 'webICP', '蜀ICP备12345678号 ', '蜀ICP备12345678号 ', '网站ICP', '2018-12-02 09:55:13', '2018-12-04 14:04:52');
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (1003, 1, 'webVersion', '1.0.1', '1.0.1', '网站版本', '2018-12-02 09:55:13', '2018-12-13 17:59:46');
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (201001, 201, 'menuManage', '管理', 'Manage', null, null, null);
+INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (201002, 201, 'menuUser', '用户', 'User', null, null, null);
+
+
+
 CREATE TABLE snowy.snowy_china_areas
 (
     id int(11) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
