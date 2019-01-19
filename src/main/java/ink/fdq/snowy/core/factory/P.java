@@ -36,6 +36,7 @@ public class P {
      */
     public final static boolean DEV_MODE = getProp().getBoolean("mode.dev", false);
 
+    public final static boolean DEV_MIN_MODE = getProp().getBoolean("mode.min", false);
     /**
      * 获取JFinal启动web时的监听端口
      */

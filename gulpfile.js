@@ -39,6 +39,12 @@ function compressSnowyJs(){
     pipe(concat('snowy.min.js')).
     pipe(gulp.dest('./src/main/webapp/assets/lib/snowy/js/'))
 }
+function compressHighlight(){
+    return gulp.src("./src/main/webapp/assets/lib/highlight/styles/*.css").
+    pipe(rename({suffix: '.min'})).
+    pipe(minifycss()).
+    pipe(gulp.dest('./src/main/webapp/assets/lib/highlight/styles/'))
+}
 
 function compressSnowyCss(){
     return gulp.src('./src/main/webapp/assets/lib/snowy/css/snowy.css').
@@ -57,6 +63,7 @@ function cleanProcess () {
 gulp.task('default',
     gulp.series(cleanProcess,
         gulp.parallel(concatSnowyCss, concatSnowyJs),
+        //
         gulp.parallel(compressSnowyJs,compressSnowyCss)
     )
 );

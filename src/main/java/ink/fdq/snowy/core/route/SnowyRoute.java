@@ -16,8 +16,8 @@ public class SnowyRoute {
         me.add(new FrontApiRoute());
         me.add(new FrontPageRoute());
 
-        if(P.DEV_MODE){
+        //if(P.DEV_MODE){
             me.add(new DevelopRoute());
-        }
+        //}
     }
 }
