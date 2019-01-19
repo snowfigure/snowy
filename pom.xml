@@ -30,6 +30,8 @@
 
         <freemarker.version>2.3.28</freemarker.version>
 
+        <ip.region.version>1.7.2</ip.region.version>
+
         <log.log4j.version>1.2.16</log.log4j.version>
         <log.slf4j.version>1.7.25</log.slf4j.version>
     </properties>
@@ -104,6 +106,12 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log.log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+            <version>${ip.region.version}</version>
         </dependency>
 
     </dependencies>
