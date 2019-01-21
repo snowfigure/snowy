@@ -16,15 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  * Date  : 2019-01-21
- * Time  : 9:24 AM
+ * Time  : 11:17 AM
  * Author: fengduqing
  **/
 
-package ink.fdq.snowy.develop.controller.api;
+package ink.fdq.snowy.core.plugin;
 
-import ink.fdq.snowy.develop.controller.DevelopController;
+import com.jfinal.plugin.druid.DruidPlugin;
+import ink.fdq.snowy.core.factory.P;
 
-public class DevelopApiBaseController extends DevelopController {
-
-
+public class DruidPluginKit {
+    public static final DruidPlugin createDruidPlugin() {
+        return new DruidPlugin(P.JDBC_URL, P.JDBC_USERNAME, P.JDBC_PASSWORD, P.JDBC_DRIVER);
+    }
 }

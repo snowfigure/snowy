@@ -16,15 +16,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  * Date  : 2019-01-21
- * Time  : 9:24 AM
+ * Time  : 11:20 AM
  * Author: fengduqing
  **/
 
-package ink.fdq.snowy.develop.controller.api;
+package ink.fdq.snowy.core.plugin;
 
-import ink.fdq.snowy.develop.controller.DevelopController;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.druid.DruidPlugin;
+import ink.fdq.snowy.core.factory.P;
+import ink.fdq.snowy.core.model.table._MappingKit;
 
-public class DevelopApiBaseController extends DevelopController {
+public class ActiveRecordPluginKit {
+    public static final ActiveRecordPlugin createActiveRecordPlugin(DruidPlugin druidPlugin){
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+        arp.setDevMode(P.DEV_MODE);
+        arp.setShowSql(P.DEV_MODE);
+        _MappingKit.mapping(arp);
 
-
+        return arp;
+    }
 }

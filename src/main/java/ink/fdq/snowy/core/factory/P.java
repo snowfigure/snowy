@@ -75,5 +75,6 @@ public class P {
     public final static String JDBC_TABLE_PREFIX = getProp().get("jdbc.tablePrefix");
 
 
+    public final static String EHCACHE_FILE = getProp().get("file.ehcache", "ehcache.xml");
 
 }

@@ -22,5 +22,22 @@
 
 package ink.fdq.snowy.develop.controller.api;
 
-public class DevelopApiMenuController {
+import com.jfinal.aop.Inject;
+import com.jfinal.plugin.ehcache.CacheKit;
+import ink.fdq.snowy.core.vo.json.Menu;
+import ink.fdq.snowy.develop.service.DevelopMenuService;
+
+public class DevelopApiMenuController extends DevelopApiBaseController{
+    @Inject
+    DevelopMenuService developMenuService;
+
+    public void get(){
+
+        Menu menu = CacheKit.get("systemMenu", "develop_menu_get");
+        if(menu == null){
+            menu = developMenuService.getDevelopMenu();
+            CacheKit.put("systemMenu", "develop_menu_get", menu);
+        }
+        renderJson(menu);
+    }
 }

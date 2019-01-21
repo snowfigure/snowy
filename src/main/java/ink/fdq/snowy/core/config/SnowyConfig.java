@@ -3,19 +3,20 @@ package ink.fdq.snowy.core.config;
 import com.jfinal.config.*;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
-import ink.fdq.snowy.core.handle.HtmlHandler;
-import ink.fdq.snowy.core.route.SnowyRoute;
-import ink.fdq.snowy.core.model.table._MappingKit;
 import ink.fdq.snowy.core.factory.P;
+import ink.fdq.snowy.core.handle.HtmlHandler;
+import ink.fdq.snowy.core.plugin.ActiveRecordPluginKit;
+import ink.fdq.snowy.core.plugin.DruidPluginKit;
+import ink.fdq.snowy.core.plugin.EhCachePluginKit;
+import ink.fdq.snowy.core.route.SnowyRoute;
 
 public class SnowyConfig extends JFinalConfig {
 
 
-    public static DruidPlugin createDruidPlugin() {
-        return new DruidPlugin(P.JDBC_URL, P.JDBC_USERNAME, P.JDBC_PASSWORD, P.JDBC_DRIVER);
-    }
+
     /**
      * 配置常量
      * @param me
@@ -48,6 +49,8 @@ public class SnowyConfig extends JFinalConfig {
 
     }
 
+
+
     /**
      *  配置插件
      * @param me
@@ -55,15 +58,15 @@ public class SnowyConfig extends JFinalConfig {
     @Override
     public void configPlugin(Plugins me) {
         /**配置 druid 数据库连接池插件*/
-        DruidPlugin druidPlugin = createDruidPlugin();
+        DruidPlugin druidPlugin = DruidPluginKit.createDruidPlugin();
         me.add(druidPlugin);
 
-        ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
-        arp.setDevMode(P.DEV_MODE);
-        arp.setShowSql(P.DEV_MODE);
-        _MappingKit.mapping(arp);
-
+        ActiveRecordPlugin arp = ActiveRecordPluginKit.createActiveRecordPlugin(druidPlugin);
         me.add(arp);
+
+        /** 加载EhCache配置文件*/
+        EhCachePlugin ecp = EhCachePluginKit.createEhCachePlugin();
+        me.add(ecp);
     }
 
     /**

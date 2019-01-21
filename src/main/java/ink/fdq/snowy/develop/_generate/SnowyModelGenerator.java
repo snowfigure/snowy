@@ -4,8 +4,8 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.plugin.druid.DruidPlugin;
-import ink.fdq.snowy.core.config.SnowyConfig;
 import ink.fdq.snowy.core.factory.P;
+import ink.fdq.snowy.core.plugin.DruidPluginKit;
 
 public class SnowyModelGenerator {
 
@@ -22,7 +22,7 @@ public class SnowyModelGenerator {
         String modelOutputDir = PathKit.getWebRootPath() + "/src/main/java/ink/fdq/snowy/core/model/table";
 
         /** 创建生成器 */
-        DruidPlugin druidPlugin = SnowyConfig.createDruidPlugin();
+        DruidPlugin druidPlugin = DruidPluginKit.createDruidPlugin();
         druidPlugin.start();
         Generator generator = new Generator(druidPlugin.getDataSource(), baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
 

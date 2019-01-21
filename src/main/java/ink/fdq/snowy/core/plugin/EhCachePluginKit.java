@@ -16,15 +16,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  * Date  : 2019-01-21
- * Time  : 9:24 AM
+ * Time  : 11:16 AM
  * Author: fengduqing
  **/
 
-package ink.fdq.snowy.develop.controller.api;
+package ink.fdq.snowy.core.plugin;
 
-import ink.fdq.snowy.develop.controller.DevelopController;
+import com.jfinal.kit.PathKit;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
+import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.config.ConfigurationFactory;
+import net.sf.ehcache.config.DiskStoreConfiguration;
 
-public class DevelopApiBaseController extends DevelopController {
+import java.io.File;
 
+public class EhCachePluginKit {
+    public static final EhCachePlugin createEhCachePlugin() {
+        String ehcacheDiskStorePath = PathKit.getWebRootPath();
+        File pathFile = new File(ehcacheDiskStorePath, ".ehcache");
 
+        Configuration cfg = ConfigurationFactory.parseConfiguration();
+        cfg.addDiskStore(new DiskStoreConfiguration().path(pathFile.getAbsolutePath()));
+        return new EhCachePlugin(cfg);
+    }
 }
