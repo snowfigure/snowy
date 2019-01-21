@@ -1,4 +1,4 @@
-<#include "/WEB-INF/page/admin/__layout.ftl" />
+<#include "/WEB-INF/page/develop/__layout.ftl" />
 
 <@layout >
 <div class="row-12">

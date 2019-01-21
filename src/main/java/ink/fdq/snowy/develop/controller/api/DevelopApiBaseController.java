@@ -15,25 +15,25 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Date  : 2019-01-17
- * Time  : 6:55 PM
+ * Date  : 2019-01-21
+ * Time  : 9:24 AM
  * Author: fengduqing
  **/
 
-package ink.fdq.snowy.portal.service;
+package ink.fdq.snowy.develop.controller.api;
 
-import ink.fdq.snowy.core.service.MenuService;
-import ink.fdq.snowy.core.vo.json.Menu;
+import com.jfinal.aop.Inject;
+import ink.fdq.snowy.develop.controller.DevelopController;
+import ink.fdq.snowy.develop.service.DevelopMenuService;
 
-public class AdminMenuService extends MenuService {
+public class DevelopApiBaseController extends DevelopController {
 
+    @Inject
+    DevelopMenuService developMenuService;
 
+    public void get(){
 
-    /**
-     * 获取后台管理菜单
-     * @return
-     */
-    public Menu getAdminMenu(){
-        return getAdminMenu(1);
+        renderJson(developMenuService.getDevelopMenu());
     }
+
 }

@@ -1,4 +1,4 @@
-Table: snowy_china_areas
+Table: snowy_china_areas	Remarks: 地区信息
 ----------+------------------+------+-----+---------+---------
  Field    | Type             | Null | Key | Default | Remarks 
 ----------+------------------+------+-----+---------+---------
@@ -8,7 +8,7 @@ Table: snowy_china_areas
  zip_code | VARCHAR(6)       | NO   |     |         |         
 ----------+------------------+------+-----+---------+---------
 
-Table: snowy_dictionary
+Table: snowy_dictionary	Remarks: 字典（含多语言、系统自定义配置等）
 -------------+--------------+------+-----+---------+---------
  Field       | Type         | Null | Key | Default | Remarks 
 -------------+--------------+------+-----+---------+---------
@@ -18,11 +18,11 @@ Table: snowy_dictionary
  value       | VARCHAR(512) | YES  |     |         | value 值(默认中文)
  value_en_us | VARCHAR(256) | YES  |     |         | /*value值（对应英文）*/
  description | VARCHAR(255) | YES  |     |         | description 描述
- create_time | DATETIME(19) | YES  |     |         | 创建时间    
- update_time | DATETIME(19) | YES  |     |         | 更新时间    
+ create_time | DATETIME(26) | YES  |     |         | 创建时间    
+ update_time | DATETIME(26) | YES  |     |         | 更新时间    
 -------------+--------------+------+-----+---------+---------
 
-Table: snowy_sys_icon
+Table: snowy_sys_icon	Remarks: 系统支持的图标
 -------+-------------+------+-----+---------+---------
  Field | Type        | Null | Key | Default | Remarks 
 -------+-------------+------+-----+---------+---------
@@ -45,7 +45,7 @@ Table: snowy_sys_resc
  resc_type      | CHAR(1)      | YES  |     | 0       | 权限类型 默认：0 后台权限：1
  resc_icon_name | VARCHAR(32)  | YES  |     |         |         
  resc_html_id   | VARCHAR(50)  | YES  |     | #       | 指定的ID号，可随机生成，用于导航菜单非重设置
- create_time    | DATETIME(19) | YES  |     |         | 创建时间    
+ create_time    | DATETIME(26) | YES  |     |         | 创建时间    
  enable_status  | CHAR(1)      | YES  |     | 0       | 是否停用 默认：0 停用：1
  remark         | VARCHAR(100) | YES  |     |         | 备注      
 ----------------+--------------+------+-----+---------+---------
@@ -59,7 +59,7 @@ Table: snowy_sys_role
  role_type     | CHAR(1)      | YES  |     | 0       |  角色类型 默认：0 后台角色：1
  role_remark   | VARCHAR(100) | YES  |     |         | 备注      
  role_sort     | INT(10)      | YES  |     |         | 排序(不超过100)
- create_time   | DATETIME(19) | YES  |     |         | 创建时间    
+ create_time   | DATETIME(26) | YES  |     |         | 创建时间    
  enable_statue | CHAR(1)      | YES  |     | 0       | 是否停用 默认：0 停用：1
 ---------------+--------------+------+-----+---------+---------
 
@@ -96,25 +96,12 @@ Table: snowy_user_info
  user_signature      | VARCHAR(255)  | YES  |     |         | 个性签名    
  login_status        | CHAR(1)       | YES  |     | 0       | 是否登录状态 默认：0 在线：1
  user_status         | INT(10)       | YES  |     | 1       | 用户状态 0：新注册，不可用；1：注册可用状态；2：连续登陆错误，禁止使用；3：多地异常登陆，禁止使用；9：用户被删除，禁止使用。
- create_time         | DATETIME(19)  | YES  |     |         | 创建时间    
- update_time         | DATETIME(19)  | YES  |     |         | 更新时间    
- last_login_time     | DATETIME(19)  | YES  |     |         | 最后登录时间  
+ create_time         | DATETIME(26)  | YES  |     |         | 创建时间    
+ update_time         | DATETIME(26)  | YES  |     |         | 更新时间    
+ last_login_time     | DATETIME(26)  | YES  |     |         | 最后登录时间  
  last_login_ip       | VARCHAR(15)   | YES  |     |         | 最后登录IP  
  last_login_country  | VARCHAR(32)   | YES  |     |         |         
  last_login_province | VARCHAR(32)   | YES  |     |         |         
  last_login_city     | VARCHAR(32)   | YES  |     |         |         
 ---------------------+---------------+------+-----+---------+---------
-
-Table: snowy_web_config
--------------+--------------+------+-----+---------+---------
- Field       | Type         | Null | Key | Default | Remarks 
--------------+--------------+------+-----+---------+---------
- id          | INT(10)      | NO   | PRI |         | id      
- key         | VARCHAR(100) | YES  |     |         | key 键   
- value       | VARCHAR(150) | YES  |     |         | value 值 
- description | VARCHAR(255) | YES  |     |         | description 描述
- create_time | DATETIME(19) | YES  |     |         | 创建时间    
- update_time | DATETIME(19) | YES  |     |         | 更新时间    
- is_system   | CHAR(1)      | YES  |     | 0       | 是否系统配置 否：0 是：1
--------------+--------------+------+-----+---------+---------
 

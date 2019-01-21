@@ -105,7 +105,7 @@ $.extend(NavBar.prototype,{
                                 if($(this).hasClass("glyphicon-chevron-up")){
                                     $(this).removeClass("glyphicon-chevron-up");
                                     $(this).addClass("glyphicon-chevron-down");
-                                }else{
+                                }else if($(this).hasClass("glyphicon-chevron-down")){
                                     $(this).removeClass("glyphicon-chevron-down");
                                     $(this).addClass("glyphicon-chevron-up");
                                 }

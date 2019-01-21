@@ -20,7 +20,7 @@
  * Author: fengduqing
  **/
 
-package ink.fdq.snowy.core.service;
+package ink.fdq.snowy.core.service.base;
 
 import com.jfinal.plugin.activerecord.Model;
 import ink.fdq.snowy.core.model.table.SysResc;

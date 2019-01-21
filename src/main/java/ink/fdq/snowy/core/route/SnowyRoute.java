@@ -3,10 +3,10 @@ package ink.fdq.snowy.core.route;
 import com.jfinal.config.Routes;
 import ink.fdq.snowy.core.route.admin.AdminApiRoute;
 import ink.fdq.snowy.core.route.admin.AdminPageRoute;
+import ink.fdq.snowy.core.route.develop.DevelopApiRoute;
 import ink.fdq.snowy.core.route.front.FrontApiRoute;
 import ink.fdq.snowy.core.route.front.FrontPageRoute;
-import ink.fdq.snowy.core.route.develop.DevelopRoute;
-import ink.fdq.snowy.core.factory.P;
+import ink.fdq.snowy.core.route.develop.DevelopPageRoute;
 
 public class SnowyRoute {
     public static void add(Routes me){
@@ -17,7 +17,8 @@ public class SnowyRoute {
         me.add(new FrontPageRoute());
 
         //if(P.DEV_MODE){
-            me.add(new DevelopRoute());
+            me.add(new DevelopPageRoute());
+            me.add(new DevelopApiRoute());
         //}
     }
 }
