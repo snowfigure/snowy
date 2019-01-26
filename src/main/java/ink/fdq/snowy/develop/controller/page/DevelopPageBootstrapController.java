@@ -8,5 +8,8 @@ public class DevelopPageBootstrapController extends DevelopPageBaseController {
     public void panel(){
         render("/WEB-INF/page/develop/bootstrap/panel.ftl");
     }
+    public void dataTable(){
+        render("/WEB-INF/page/develop/bootstrap/dataTable.ftl");
+    }
 
 }

@@ -1,8 +1,12 @@
 package ink.fdq.snowy.core.base.controller;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
 import ink.fdq.snowy.core.factory.P;
 import ink.fdq.snowy.core.factory.S;
+import ink.fdq.snowy.core.vo.json.Grid;
+
+import java.util.List;
 
 public class BaseController extends Controller {
 
@@ -18,5 +22,12 @@ public class BaseController extends Controller {
             setAttr("dev_min_mode","");
         }
         super.render(view);
+    }
+
+
+    public void renderJson(Page<?> page){
+        Grid grid = new Grid(page.getList(), page.getPageNumber(), page.getPageSize(), page.getTotalRow());
+
+        renderJson(grid);
     }
 }

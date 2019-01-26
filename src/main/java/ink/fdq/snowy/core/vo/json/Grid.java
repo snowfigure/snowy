@@ -33,7 +33,7 @@ public class Grid {
     private int totalPage;
     private List<?> rows;
 
-    public Grid(List<Record> list, int pageNumber, int pageSize, int totalRow) {
+    public Grid(List<?> list, int pageNumber, int pageSize, int totalRow) {
         this.setRows(list);
         this.setPageNumber(pageNumber);
         this.setPageSize(pageSize);
