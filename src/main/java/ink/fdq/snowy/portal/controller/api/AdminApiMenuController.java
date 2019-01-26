@@ -17,6 +17,5 @@ public class AdminApiMenuController extends AdminApiBaseController {
             CacheKit.put("systemMenu", "admin_menu_get", menu);
         }
         renderJson(menu);
-        renderJson(adminMenuService.getAdminMenu());
     }
 }

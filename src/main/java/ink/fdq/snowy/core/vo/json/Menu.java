@@ -6,6 +6,7 @@ import java.util.List;
 public class Menu {
 
     private String id;
+    private String pid;
     private String name;
     private String iconClass;
     private String url;
@@ -86,6 +87,14 @@ public class Menu {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public void addSubMenu(Menu subMenu){

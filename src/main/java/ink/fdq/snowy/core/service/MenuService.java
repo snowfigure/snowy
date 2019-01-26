@@ -35,7 +35,7 @@ public class MenuService {
      * @param sysResc
      * @return
      */
-    protected Menu convertToMenu(SysResc sysResc){
+    public Menu convertToMenu(SysResc sysResc){
         Menu menu = new Menu();
         menu.setName(sysResc.getRescName() + "");
         menu.setIconClass(sysResc.getRescIconName() + "");
@@ -64,7 +64,9 @@ public class MenuService {
             List<SysResc> subRescList = sysRescService.findByPid(resc.getRescId());
 
             for(SysResc subResc : subRescList){
-                menu.addSubMenu(convertToMenu(subResc));
+                Menu subMenu = convertToMenu(subResc);
+                subMenu.setPid(menu.getPid());
+                menu.addSubMenu(subMenu);
             }
             adminMenu.addSubMenu(menu);
         }

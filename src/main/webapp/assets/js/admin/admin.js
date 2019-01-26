@@ -26,5 +26,11 @@ $.extend(SnowyAdmin.prototype,{
         var that = this;
         that.menu.init();
         return that;
+    },
+
+    selectMenu : function(id, pid){
+        var that = this;
+        that.menu.selectMenu(that.menu, id,pid);
     }
+
 });

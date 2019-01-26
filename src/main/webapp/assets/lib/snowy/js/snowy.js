@@ -357,73 +357,85 @@ $.extend(NavBar.prototype,{
                 $("#" + that.id).html(html);
 
                 /** 绑定点击操作*/
-                that.bindTabsClick(that);
+                that._bindTabsClick(that);
             }
         });
     },
 
-    bindTabsClick : function(that){
+    __clickNodeChange : function(click_node){
+        /***  点击的li添加选中项 **/
+        click_node.children("div").each(function(){
+            $(this).hasClass("nav-bar-current") ? $(this).removeClass("nav-bar-current") : $(this).addClass("nav-bar-current");
+
+            $(this).children(".glyphicon").each(function(){
+                if($(this).hasClass("glyphicon-chevron-up")){
+                    $(this).removeClass("glyphicon-chevron-up");
+                    $(this).addClass("glyphicon-chevron-down");
+                }else if($(this).hasClass("glyphicon-chevron-down")){
+                    $(this).removeClass("glyphicon-chevron-down");
+                    $(this).addClass("glyphicon-chevron-up");
+                }
+
+            });
+        });
+
+        click_node.children("ul").each(function(){
+            if($(this).hasClass("display")){
+                $(this).slideUp(function(){
+                    $(this).removeClass("display");
+                    $(this).addClass("none");
+                });
+
+            }else{
+                $(this).slideDown(function(){
+                    $(this).removeClass("none");
+                    $(this).addClass("display");
+                });
+
+            }
+
+        });/*** this.children ul each end **/
+    },
+
+    __brotherNodeChange:function(brother_node){
+        /** Start 关闭父节点所有的选中属性 ***/
+        brother_node.children("ul").each(function(){
+            $(this).slideUp(function(){
+                $(this).removeClass("display");
+                $(this).addClass("none");
+            });
+
+        });/*** this.children ul each end **/
+
+        /*去除所有的 nav-bar-current*/
+        brother_node.children("div").each(function(){
+            $(this).removeClass("nav-bar-current");
+
+            $(this).children(".glyphicon").each(function(){
+                $(this).removeClass("glyphicon-chevron-down");
+                $(this).removeClass("glyphicon-chevron-up");
+                $(this).addClass("glyphicon-chevron-down");
+            });
+
+        });/*** END this.children div each end **/
+        /*** END 关闭父节点所有的选中属性 **/
+    },
+
+    _bindTabsClick : function(that){
 
         $("#" + that.id + " ul").children("li").each(function(){
             $(this).click(function(){
-                var that = this;
-                $(this).parent("ul").children("li").each(function(){
-                    if(that === this){
-                        /***  点击的li添加选中项 **/
-                        $(this).children("div").each(function(){
-                            $(this).hasClass("nav-bar-current") ? $(this).removeClass("nav-bar-current") : $(this).addClass("nav-bar-current");
+                var click_node_this = this;
+                var click_node = $(click_node_this);
 
-                            $(this).children(".glyphicon").each(function(){
-                                if($(this).hasClass("glyphicon-chevron-up")){
-                                    $(this).removeClass("glyphicon-chevron-up");
-                                    $(this).addClass("glyphicon-chevron-down");
-                                }else{
-                                    $(this).removeClass("glyphicon-chevron-down");
-                                    $(this).addClass("glyphicon-chevron-up");
-                                }
+                click_node.parent("ul").children("li").each(function(){
+                    var brother_node_this = this;
+                    var brother_node = $(brother_node_this);
 
-                            });
-                        });
-
-                        $(this).children("ul").each(function(){
-                            if($(this).hasClass("display")){
-                                $(this).slideUp(function(){
-                                    $(this).removeClass("display");
-                                    $(this).addClass("none");
-                                });
-
-                            }else{
-                                $(this).slideDown(function(){
-                                    $(this).removeClass("none");
-                                    $(this).addClass("display");
-                                });
-
-                            }
-
-                        });/*** this.children ul each end **/
-
+                    if(click_node_this === brother_node_this){
+                        that.__clickNodeChange(click_node);
                     }else{
-                        /** Start 关闭父节点所有的选中属性 ***/
-                        $(this).children("ul").each(function(){
-                            $(this).slideUp(function(){
-                                $(this).removeClass("display");
-                                $(this).addClass("none");
-                            });
-
-                        });/*** this.children ul each end **/
-
-                        /*去除所有的 nav-bar-current*/
-                        $(this).children("div").each(function(){
-                            $(this).removeClass("nav-bar-current");
-
-                            $(this).children(".glyphicon").each(function(){
-                                $(this).removeClass("glyphicon-chevron-down");
-                                $(this).removeClass("glyphicon-chevron-up");
-                                $(this).addClass("glyphicon-chevron-down");
-                            });
-
-                        });/*** END this.children div each end **/
-                        /*** END 关闭父节点所有的选中属性 **/
+                        that.__brotherNodeChange(brother_node);
                     }
 
                 });

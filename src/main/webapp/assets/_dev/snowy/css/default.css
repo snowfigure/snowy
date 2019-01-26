@@ -43,7 +43,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     padding: 5px 0 5px;
     box-sizing: border-box;
     background-color: #fff;
-    margin-left: 160px;
+    margin-left: 230px;
 }
 
 /* end frame */
@@ -54,7 +54,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     position: fixed;
     box-shadow: 1px 0 3px rgba(0, 0, 0, .15);
     width: 100%;
-    margin-left: 160px;
+    margin-left: 230px;
     top: 0;
     background-color: #EDEDED;
     z-index: 80;
@@ -106,7 +106,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 /* end preference nav-bar*/
 
 #main-container {
-    margin: 50px 0 0 160px;
+    margin: 50px 0 0 230px;
     padding: 15px;
     min-height: 100px;
     background-color: #F7F7F7;

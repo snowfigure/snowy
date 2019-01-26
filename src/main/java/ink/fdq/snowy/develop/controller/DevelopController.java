@@ -22,7 +22,7 @@
 
 package ink.fdq.snowy.develop.controller;
 
-import ink.fdq.snowy.core.base.BaseController;
+import ink.fdq.snowy.core.base.controller.BasePageController;
 
-public class DevelopController extends BaseController {
+public class DevelopController extends BasePageController {
 }

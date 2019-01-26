@@ -6,6 +6,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import ink.fdq.snowy.core.factory.M;
 import ink.fdq.snowy.core.factory.P;
 import ink.fdq.snowy.core.handle.HtmlHandler;
 import ink.fdq.snowy.core.plugin.ActiveRecordPluginKit;
@@ -42,6 +43,14 @@ public class SnowyConfig extends JFinalConfig {
     public void configRoute(Routes me) {
         /*添加路由*/
         SnowyRoute.add(me);
+        System.out.println(Routes.getRoutesList().size());
+        for(Routes routes : Routes.getRoutesList()){
+            for(Routes.Route route : routes.getRouteItemList()){
+                System.out.println(route.getControllerKey());
+                Class<?> ctlClass = route.getControllerClass();
+            }
+
+        }
     }
 
     @Override
@@ -89,7 +98,9 @@ public class SnowyConfig extends JFinalConfig {
 
     @Override
     public void afterJFinalStart() {
-        super.afterJFinalStart();
+
+        M.init();
+        M.getMenu("");
     }
 
     @Override

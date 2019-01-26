@@ -30,6 +30,8 @@
     <#include "/WEB-INF/page/admin/__footer.ftl" />
 <script type="text/javascript">
     var snowy = new SnowyAdmin("${Server}");
-    snowy.setMenu("nav-bar", "${Server}/admin/api/menu/get").initMenu();
+    snowy.setMenu("nav-bar", "${Server}/admin/api/menu/get").
+            initMenu().
+            selectMenu("${navBarCurrentId}","${navBarParentId}");
 </script>
 </#macro>

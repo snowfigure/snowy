@@ -23,6 +23,7 @@
 package ink.fdq.snowy.core.service.base;
 
 import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Page;
 import ink.fdq.snowy.core.model.table.SysResc;
 import ink.fdq.snowy.core.base.BaseService;
 import ink.fdq.snowy.core.vo.sql.WherePara;
@@ -37,6 +38,10 @@ public class SysRescService extends BaseService {
         return dao;
     }
 
+
+    public Page<SysResc> paginate(int pageNumber, int pageSize){
+        return dao.paginate(pageNumber, pageSize, "select * ", " from " + getTable());
+    }
     /**
      * 根据父ID查询资源信息
      * @param pid

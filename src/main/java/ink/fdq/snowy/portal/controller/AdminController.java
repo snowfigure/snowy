@@ -1,6 +1,6 @@
 package ink.fdq.snowy.portal.controller;
 
-import ink.fdq.snowy.core.base.BaseController;
+import ink.fdq.snowy.core.base.controller.BasePageController;
 
-public class AdminController extends BaseController {
+public class AdminController extends BasePageController {
 }

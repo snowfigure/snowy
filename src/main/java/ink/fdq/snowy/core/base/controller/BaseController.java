@@ -1,4 +1,4 @@
-package ink.fdq.snowy.core.base;
+package ink.fdq.snowy.core.base.controller;
 
 import com.jfinal.core.Controller;
 import ink.fdq.snowy.core.factory.P;

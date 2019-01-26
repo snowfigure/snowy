@@ -172,7 +172,8 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 }
 
 #nav-bar .nav-bar-right-span{
-    margin-left: 50px;
+    float: right;
+    margin-right: 30px;
 }
 
 #nav-bar .nav-bar-left-span{
