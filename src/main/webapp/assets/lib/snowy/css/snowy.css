@@ -122,8 +122,31 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     margin-bottom: 5px;
 }
 
-tbody > tr > td{
-    font-weight: lighter;
+
+.pageSizeSelect > select {
+    width: 45px;
+    height: 34px;
+    padding: 1px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    border-radius: 0px 4px 4px 0
+}
+
+.pageTotalItems > li > span {
+    border:0;
+}
+
+.pageGotoPage > li > span {
+    border:0;
+    margin:0;
+    padding:0;
+}
+
+.pageGotoPage > li > span > input {
+    width: 30px;
+    height: 30px;
+    padding: 1px;
+    text-align: center;
 }
 
 /* start first tab */

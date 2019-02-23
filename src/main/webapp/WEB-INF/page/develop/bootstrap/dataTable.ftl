@@ -151,16 +151,7 @@
                 modify : {func: undefined, class : '' },
                 delete : {func: undefined, class : '' },
                 detail : {func: undefined, class : '' },
-            },
-            url : {
-                paginate : "${Server}/develop/api/dataTable/page",
-                create   : "${Server}/develop/api/dataTable/create",
-                modify   : "${Server}/develop/api/dataTable/modify",
-                delete   : "${Server}/develop/api/dataTable/delete",
-                detail   : "${Server}/develop/api/dataTable/detail"
             }
-
-
         },
         init : function(){
             this.dataTable.init(this.dataTablePara);

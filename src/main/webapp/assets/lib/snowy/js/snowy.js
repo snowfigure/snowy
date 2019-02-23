@@ -319,8 +319,10 @@ $.extend(DataTable.prototype,{
         that.initTableBodyFrame();
         that.initPaginationBodyFrame();
 
+        that.__loadData();
         that.__fillTableThead();
         that.__fillTableBody();
+        that.__fillTablePagination();
         return this;
     },
 
@@ -423,17 +425,16 @@ $.extend(DataTable.prototype,{
         $("#" + that.component_id.table_ctn_id + " thead > tr ").html(htmlArr.join(""));
     },
 
-    __fillTableBody : function(){
+    /**
+     * 加载数据
+     * @private
+     */
+    __loadData : function(){
         var that = this;
         var tbodyCols  = that.__getTableCols('tbodyCols');
         if(__IsEmpty((tbodyCols))){
             return;
         }
-        var theadCols = that.__getTableCols('theadCols');
-        if(__IsEmpty((theadCols))){
-            return;
-        }
-
         if( "url" === tbodyCols.mode){
             var url = tbodyCols.url;
             $.ajax({
@@ -447,34 +448,47 @@ $.extend(DataTable.prototype,{
             });
         }
 
+    },
 
+    /**
+     * 填充数据
+     * @private
+     */
+    __fillTableBody : function(){
+        var that = this;
         var htmlArr = [];
-        var showSelect = __IsTrue(that.__isShowSelect()) ? '' : 'none';
-        var multiSelect = __IsTrue(that.__isMultiSelect()) ? 'checkbox' : 'radio';
-        var primaryKey = that.__getTableConfig('primaryKey');
-        var randomKey =  __randomString(8);
-
-        that.dataTablePara.tableConfig['randomKey'] = randomKey;
-
-        var rows = tbodyCols.data.rows;
-        if(__IsEmpty(rows)){
+        var tbodyCols  = that.__getTableCols('tbodyCols');
+        var theadCols = that.__getTableCols('theadCols');
+        if(__IsEmpty((tbodyCols)) || __IsEmpty((theadCols)) || __IsEmpty(tbodyCols.data) || __IsEmpty(tbodyCols.data.rows) ){
             return;
         }
+        var rows = tbodyCols.data.rows;
+        var showSelect = __IsTrue(that.__isShowSelect()) ? '' : 'none';
+        var multiSelect = __IsTrue(that.__isMultiSelect()) ? 'checkbox' : 'radio';
+
         for(var idx = 0; idx < rows.length; idx++){
             var row = rows[idx];
-            var pkValue = row[primaryKey];
+            var randomKey =  __randomString(8);
             var rkValue = __randomString(32);
+            row['randomKey'] = randomKey;
             row[randomKey] = rkValue;
-            htmlArr.push(String.format("<tr {0}='{2}' {1}='{3}'>", primaryKey, pkValue, randomKey, rkValue));
-            htmlArr.push(String.format("<th  class='{0}' style='width:30px'><input type='{1}'></th>",showSelect, multiSelect));
+
+            /*var primaryKey = that.__getTableConfig('primaryKey');
+            that.dataTablePara.tableConfig['randomKey'] = randomKey;
+            var pkValue = row[primaryKey];
+            htmlArr.push(String.format("<tr {0}='{1}' {2}='{3}'>", primaryKey, pkValue, randomKey, rkValue));*/
+
+            htmlArr.push(String.format("<tr {0}='{1}'>", randomKey, rkValue));
+            htmlArr.push(String.format("<td  class='{0}' style='width:30px'><input type='{1}'></td>",showSelect, multiSelect));
 
             for(var colIdx = 0; colIdx < theadCols.length; colIdx++){
-                var col = theadCols[colIdx];
-                var colValue = row[col.id];
-                var formatFunc = col.formatFunc;
-                var style = __IsEmpty(col.style) ? "" : col.style;
+                var headCol = theadCols[colIdx];
+                var colValue = row[headCol.id];
+                var formatFunc = headCol.formatFunc;
+                var style = __IsEmpty(headCol.style) ? "" : headCol.style;
+                var visible = __IsTrue(headCol.visible) ? "" : "none";
                 colValue = __IsEmpty(formatFunc) ? colValue : formatFunc(row);
-                htmlArr.push(String.format("<th  class='{0}' style='{1}'>{2}</th>",showSelect, style, colValue));
+                htmlArr.push(String.format("<td  class='{0}' style='{1}'>{2}</td>",visible, style, colValue));
             }
 
             htmlArr.push("</tr>");
@@ -483,15 +497,117 @@ $.extend(DataTable.prototype,{
         $("#" + that.component_id.table_ctn_id + " tbody ").html(htmlArr.join(""));
     },
 
+    /**
+     * @Todo 页面处理
+     * @private
+     */
+    ____fillTablePagination__pageSelect : function(){
+        var that = this;
+        var htmlArr = [];
+
+        var temp =
+        "<li class='disabled'><a href='#'>&lt;&lt;</a></li>" +
+        "<li class='disabled'><a href='#'> &lt; </a></li>" +
+        "<li class='active'><a href='#'>1</a></li>" +
+        "<li><a href='#'>2</a></li>" +
+        "<li><a href='#'>3</a></li>" +
+        "<li><a href='#'>4</a></li>" +
+        "<li><a href='#'>5</a></li>" +
+        "<li><a href='#'>6</a></li>" +
+        "<li><a href='#'> &gt; </a></li>" +
+        "<li><a href='#'>&gt;&gt;</a></li>"
+
+        htmlArr.push(temp);
+        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSelect_id).html(htmlArr.join(""));
+    },
+    /**
+     * @Todo 刷新
+     * @private
+     */
+    ____fillTablePagination__refresh: function(){
+        var that = this;
+        var htmlArr = [];
+
+        var temp = "<li><span class='glyphicon glyphicon-refresh' style='top: 0'></span></li>";
+        htmlArr.push(temp);
+        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id).html(htmlArr.join(""));
+    },
+
+    /**
+     * @Todo 实现分页
+     * @private
+     */
+    ____fillTablePagination__pageSizeSelect: function(){
+        var that = this;
+        var htmlArr = [];
+
+        var temp =
+            "<li><span class='glyphicon glyphicon-list' style='top: 0'></span></li>" +
+            "<li>" +
+            "<span style='padding: 0;border: 0;'>" +
+            "  <select class='form-control' >" +
+            "    <option>10</option>" +
+            "    <option>20</option>" +
+            "    <option>30</option>" +
+            "    <option>40</option>" +
+            "    <option>50</option>" +
+            "  </select>" +
+            "</span>" +
+            "</li>";
+
+        htmlArr.push(temp);
+        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id).html(htmlArr.join(""));
+    },
+    ____fillTablePagination__totalItems: function(){
+        var that = this;
+        var htmlArr = [];
+        var tbodyCols  = that.__getTableCols('tbodyCols');
+        if(__IsEmpty((tbodyCols)) || __IsEmpty(tbodyCols.data) ){
+            return;
+        }
+        var totalRow = tbodyCols.data.totalRow;
+        var totalPage = tbodyCols.data.totalPage;
+
+        var temp = String.format("<li><span>共{0} 条</span></li><li><span>共 {1} 页</span></li>", totalRow, totalPage);
+        htmlArr.push(temp);
+        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.totalItems_id).html(htmlArr.join(""));
+    },
+
+    /**
+     * @Todo 跳转
+     * @private
+     */
+    ____fillTablePagination__gotoPage: function(){
+        var that = this;
+        var htmlArr = [];
+
+        var temp =
+            "<li><span style='padding:6px 3px' >到</span></li>" +
+            "<li><span><input type='text' class='form-control' value='1'></span></li>" +
+            "<li><span style='padding:6px 3px' >页</span></li>";
+        htmlArr.push(temp);
+        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.gotoPage_id).html(htmlArr.join(""));
+    },
+
+    __fillTablePagination : function(){
+        var that = this;
+        that.____fillTablePagination__pageSelect();
+        that.____fillTablePagination__refresh();
+        that.____fillTablePagination__pageSizeSelect();
+        that.____fillTablePagination__totalItems();
+        that.____fillTablePagination__totalItems();
+        that.____fillTablePagination__gotoPage();
+    },
+
     initPaginationBodyFrame : function(){
         var that = this;
         var htmlArr = [];
 
-        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.pageSelect_id));
-        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.refresh_id));
-        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.pageSizeSelect_id));
-        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.totalItems_id));
-        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.gotoPage_id));
+        htmlArr.push(String.format("<ul class='pagination pageSelect' id='{0}'></ul>", that.component_id.pagination.pageSelect_id));
+        htmlArr.push(String.format("<ul class='pagination pageRefresh' id='{0}'></ul>", that.component_id.pagination.refresh_id));
+        htmlArr.push(String.format("<ul class='pagination pageSizeSelect' id='{0}'></ul>", that.component_id.pagination.pageSizeSelect_id));
+        htmlArr.push(String.format("<ul class='pagination pageTotalItems' id='{0}'></ul>", that.component_id.pagination.totalItems_id));
+        htmlArr.push(String.format("<ul class='pagination pageGotoPage' id='{0}'></ul>", that.component_id.pagination.gotoPage_id));
 
         $("#" + that.component_id.pagination_ctn_id).html(htmlArr.join(""));
     }

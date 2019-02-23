@@ -223,6 +223,10 @@ $.extend(DataTable.prototype,{
         $("#" + that.component_id.table_ctn_id + " tbody ").html(htmlArr.join(""));
     },
 
+    /**
+     * @Todo 页面处理
+     * @private
+     */
     ____fillTablePagination__pageSelect : function(){
         var that = this;
         var htmlArr = [];
@@ -242,7 +246,10 @@ $.extend(DataTable.prototype,{
         htmlArr.push(temp);
         $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSelect_id).html(htmlArr.join(""));
     },
-
+    /**
+     * @Todo 刷新
+     * @private
+     */
     ____fillTablePagination__refresh: function(){
         var that = this;
         var htmlArr = [];
@@ -251,6 +258,11 @@ $.extend(DataTable.prototype,{
         htmlArr.push(temp);
         $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id).html(htmlArr.join(""));
     },
+
+    /**
+     * @Todo 实现分页
+     * @private
+     */
     ____fillTablePagination__pageSizeSelect: function(){
         var that = this;
         var htmlArr = [];
@@ -286,6 +298,11 @@ $.extend(DataTable.prototype,{
         htmlArr.push(temp);
         $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.totalItems_id).html(htmlArr.join(""));
     },
+
+    /**
+     * @Todo 跳转
+     * @private
+     */
     ____fillTablePagination__gotoPage: function(){
         var that = this;
         var htmlArr = [];
