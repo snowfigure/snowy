@@ -10,7 +10,12 @@ var del = require('del');
 function concatSnowyCss(){
     var snowyCss = [
         "./src/main/webapp/assets/_dev/snowy/css/default.css",
-        "./src/main/webapp/assets/_dev/snowy/css/nav-bar.css"
+        "./src/main/webapp/assets/_dev/snowy/css/max-960/default-960.css",
+        "./src/main/webapp/assets/_dev/snowy/css/max-480/default-480.css",
+
+        "./src/main/webapp/assets/_dev/snowy/css/nav-bar.css",
+        "./src/main/webapp/assets/_dev/snowy/css/max-960/nav-bar-960.css",
+        "./src/main/webapp/assets/_dev/snowy/css/max-480/nav-bar-480.css"
     ];
     return gulp.src(snowyCss).
             pipe(concat('snowy.css')).

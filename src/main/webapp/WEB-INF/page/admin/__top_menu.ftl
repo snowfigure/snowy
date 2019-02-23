@@ -1,4 +1,4 @@
-<span class="right" style="margin-right: 100px">
+<span class="right" style="margin-right: 160px">
     <a href="${Server}" title="首页">
         <div class="avatar" style="background-image: url(${Server}/assets/images/logo.png)"></div>
         snowfigure

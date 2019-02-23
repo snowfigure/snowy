@@ -149,6 +149,36 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     text-align: center;
 }
 
+@media screen and (max-width: 960px){
+    #top  {
+        margin-left: 150px;
+    }
+
+    #main-container {
+        margin: 50px 0 0 150px;
+    }
+
+    .footer {
+        margin-left: 150px;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    #top  {
+        margin-left: 1px;
+    }
+
+    #main-container {
+        margin: 50px 0 0 1px;
+    }
+
+    .footer {
+        margin-left: 1px;
+    }
+
+}
+
 /* start first tab */
 #nav-bar {
     height: 100%;
@@ -183,7 +213,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 
 #nav-bar-menu ul {
     list-style: none;
-    width: 240px;
+    width: 250px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -321,4 +351,33 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     background-color: #FFFFFF;
     padding: 15px;
     border-radius: 0 0 4px 4px;
+}
+
+@media screen and (max-width: 960px){
+    #nav-bar {
+        width: 150px;
+    }
+
+    #nav-bar #nav-bar-footer{
+        width: 150px;
+    }
+
+    #nav-bar-menu ul {
+        width: 190px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #nav-bar {
+        margin-left: -300px;
+        width: 150px;
+    }
+
+    #nav-bar #nav-bar-footer{
+        width: 150px;
+    }
+
+    #nav-bar-menu ul {
+        width: 190px;
+    }
 }

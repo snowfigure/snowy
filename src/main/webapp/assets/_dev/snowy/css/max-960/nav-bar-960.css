@@ -1,0 +1,14 @@
+
+@media screen and (max-width: 960px){
+    #nav-bar {
+        width: 150px;
+    }
+
+    #nav-bar #nav-bar-footer{
+        width: 150px;
+    }
+
+    #nav-bar-menu ul {
+        width: 190px;
+    }
+}

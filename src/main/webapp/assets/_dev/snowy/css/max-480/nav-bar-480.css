@@ -1,0 +1,15 @@
+
+@media screen and (max-width: 480px) {
+    #nav-bar {
+        margin-left: -300px;
+        width: 150px;
+    }
+
+    #nav-bar #nav-bar-footer{
+        width: 150px;
+    }
+
+    #nav-bar-menu ul {
+        width: 190px;
+    }
+}
