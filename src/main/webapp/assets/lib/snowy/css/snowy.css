@@ -43,7 +43,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     padding: 5px 0 5px;
     box-sizing: border-box;
     background-color: #fff;
-    margin-left: 160px;
+    margin-left: 230px;
 }
 
 /* end frame */
@@ -54,7 +54,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     position: fixed;
     box-shadow: 1px 0 3px rgba(0, 0, 0, .15);
     width: 100%;
-    margin-left: 160px;
+    margin-left: 230px;
     top: 0;
     background-color: #EDEDED;
     z-index: 80;
@@ -106,7 +106,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 /* end preference nav-bar*/
 
 #main-container {
-    margin: 50px 0 0 160px;
+    margin: 50px 0 0 230px;
     padding: 15px;
     min-height: 100px;
     background-color: #F7F7F7;
@@ -122,31 +122,56 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     margin-bottom: 5px;
 }
 
+tbody > tr > td{
+    font-weight: lighter;
+}
+
 /* start first tab */
 #nav-bar {
     height: 100%;
     min-height: 468px;
-    width: 160px;
+    width: 230px;
     position: fixed;
-    top: 0;
+    top : 0;
+    padding-top: 20px;
     background-color: #2A3F54;
     overflow: hidden;
 }
 
-#nav-bar ul {
+#nav-bar #nav-bar-header{
+
+}
+
+
+#nav-bar #nav-bar-menu{
+
+}
+
+#nav-bar #nav-bar-footer{
+    bottom: 0;
+    clear: both;
+    display: block;
+    padding: 5px 0 0;
+    position: fixed;
+    width: 230px;
+    background: #2A3F54;
+    z-index: 999;
+}
+
+#nav-bar-menu ul {
     list-style: none;
-    width: 180px;
+    width: 240px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
-#nav-bar li {
+#nav-bar-menu li {
     margin-left: 0px;
     margin-bottom: 5px;
 }
 
-#nav-bar li > div > a,
-#nav-bar .nav-bar-parent{
+#nav-bar-menu li > div > a,
+#nav-bar-menu .nav-bar-parent{
     color: #FFFFFF;
     display: block;
     text-decoration: none;
@@ -158,39 +183,45 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
     cursor: pointer;
 }
 
-
-
-#nav-bar a:hover,
-#nav-bar .nav-bar-parent:hover,
-#nav-bar a.nav-bar-current,
-#nav-bar .nav-bar-current{
+#nav-bar-menu >ul >li >div:hover{
     color:#FFFFFF;
     text-shadow: rgba(0,0,0,.25) 0 -1px 0;
     background: linear-gradient(#334556,#2C4257),#2A3F54;
     box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;
-    border-left: 5px solid #1ABB9C;
 }
 
-#nav-bar .nav-bar-right-span{
+
+#nav-bar-menu .nav-bar-current{
+    color:#FFFFFF;
+    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
+    background: linear-gradient(#334556,#2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;
+}
+
+#nav-bar-menu .nav-bar-current{
+    border-left: 3px solid #1ABB9C;
+}
+
+#nav-bar-menu .nav-bar-right-span{
     float: right;
     margin-right: 30px;
 }
 
-#nav-bar .nav-bar-left-span{
+#nav-bar-menu .nav-bar-left-span{
     margin-left: 5px;
     margin-right: 10px;
 }
-#nav-bar .nav-bar-current .nav-bar-left-span{
+#nav-bar-menu .nav-bar-current .nav-bar-left-span{
     margin-left: 0px;
 }
 
 
-#nav-bar li li {
+#nav-bar-menu li li {
     border-bottom: 0;
 }
 
 
-#nav-bar li li > div > a {
+#nav-bar-menu li li > div > a {
     padding: 10px 0 25px 30px;
     line-height: 15px;
     height: 15px;
@@ -201,39 +232,69 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dd, dl, ol {
 /* end first nav-bar */
 
 /* start sub nav-bar */
-#nav-bar .sub-nav-bar {
+#nav-bar-menu .sub-nav-bar {
     border-radius: 4px 4px 0 0;
     overflow: hidden;
 }
 
-#nav-bar .sub-nav-bar ul {
+#nav-bar-menu .sub-nav-bar ul {
     list-style: none outside none;
     margin-right: 24px;
 }
 
-#nav-bar .sub-nav-bar li {
+#nav-bar-menu .sub-nav-bar li {
     margin: 0;
 }
 
-#nav-bar .sub-nav-bar li a {
+#nav-bar-menu .sub-nav-bar li:before
+{
+    background: #425668;
+    bottom: auto;
+    content: "";
+    height: 8px;
+    left: 23px;
+    margin-top: 15px;
+    position: absolute;
+    right: auto;
+    width: 8px;
+    z-index: 1;
+    border-radius: 50%;
+}
+#nav-bar-menu .sub-nav-bar li:after
+{
+    background: #425668;
+    bottom: auto;
+    content: "";
+    height: 36px;
+    left: 26px;
+    margin-top: -34px;
+    position: absolute;
+    right: auto;
+    width: 1px;
+    z-index: 1;
+    border-radius: 50%;
+
+}
+
+#nav-bar-menu .sub-nav-bar li a {
     display: block;
     line-height: 18px;
     text-decoration: none;
     margin-left: 10px;
 }
 
-#nav-bar .sub-nav-bar a:hover,
-#nav-bar .sub-nav-bar a.sub-nav-bar-current,
-#nav-bar .sub-nav-bar .sub-nav-bar-current{
-    color:#FFFFFF;
-    margin-left: 5px;
-    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
-    background: linear-gradient(#334556,#2C4257),#2A3F54;
-    box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;
-    border-left: 2px solid #1ABB9C;
+#nav-bar-menu .sub-nav-bar li div:hover{
+    background: rgba(255,255,255,.05);
 }
 
-#nav-bar .sub-nav-bar-main {
+#nav-bar-menu .sub-nav-bar .sub-nav-bar-current{
+    color:#FFFFFF;
+    margin-left: 0;
+    background: rgba(255,255,255,.05);
+}
+
+
+#nav-bar-menu .sub-nav-bar-main {
     background-color: #FFFFFF;
     padding: 15px;
     border-radius: 0 0 4px 4px;

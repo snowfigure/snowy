@@ -79,3 +79,14 @@ var __IsFalse = function(object){
 
     return false;
 };
+
+var __randomString = function(length){
+    length = length || 32;
+    var $chars = '_ABCD_EFGH_IJKLMN_OPQRSTUVWX_YZabcdefgh_ijklmnopqrstu_vwxyz01234_56789';
+    var maxPos = $chars.length;
+    var string = '';
+    for (var idx = 0; idx < length; idx++) {
+        string += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return string;
+};

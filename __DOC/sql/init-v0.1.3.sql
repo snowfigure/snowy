@@ -1,3 +1,5 @@
+drop table if exists snowy.snowy_china_areas;
+
 CREATE TABLE snowy.snowy_china_areas
 (
     id int(11) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -1547,6 +1549,8 @@ INSERT INTO snowy.snowy_china_areas (id, p_id, name, zip_code) VALUES (1542, 158
 INSERT INTO snowy.snowy_china_areas (id, p_id, name, zip_code) VALUES (1543, 158, '福鼎市', '355200');
 INSERT INTO snowy.snowy_china_areas (id, p_id, name, zip_code) VALUES (1544, 159, '东湖区', '330006');
 INSERT INTO snowy.snowy_china_areas (id, p_id, name, zip_code) VALUES (1545, 159, '西湖区', '330009');
+
+drop table if exists snowy.snowy_dictionary;
 CREATE TABLE snowy.snowy_dictionary
 (
     id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -1569,6 +1573,8 @@ INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, descript
 INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (1003, 1, 'webVersion', '1.0.1', '1.0.1', '网站版本', '2018-12-02 09:55:13', '2018-12-13 17:59:46');
 INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (201001, 201, 'menuManage', '管理', 'Manage', null, null, null);
 INSERT INTO snowy.snowy_dictionary (id, pid, `key`, value, value_en_us, description, create_time, update_time) VALUES (201002, 201, 'menuUser', '用户', 'User', null, null, null);
+
+drop table if exists snowy.snowy_sys_icon;
 CREATE TABLE snowy.snowy_sys_icon
 (
     id int(11) PRIMARY KEY NOT NULL COMMENT '当前ID，如果是父节点，那么为ICON集合的分类（如Bootstrap等）' AUTO_INCREMENT,
@@ -1837,6 +1843,8 @@ INSERT INTO snowy.snowy_sys_icon (id, pid, name, value) VALUES (10255, 10, 'menu
 INSERT INTO snowy.snowy_sys_icon (id, pid, name, value) VALUES (10256, 10, 'menu-right', 'glyphicon glyphicon-menu-right');
 INSERT INTO snowy.snowy_sys_icon (id, pid, name, value) VALUES (10257, 10, 'menu-down', 'glyphicon glyphicon-menu-down');
 INSERT INTO snowy.snowy_sys_icon (id, pid, name, value) VALUES (10258, 10, 'menu-up', 'glyphicon glyphicon-menu-up');
+
+drop table if exists snowy.snowy_sys_resc;
 CREATE TABLE snowy.snowy_sys_resc
 (
     resc_id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -1871,6 +1879,8 @@ INSERT INTO snowy.snowy_sys_resc (resc_id, resc_pid, resc_name, resc_url, resc_l
 INSERT INTO snowy.snowy_sys_resc (resc_id, resc_pid, resc_name, resc_url, resc_level, resc_sort, resc_type, resc_icon_name, resc_html_id, create_time, enable_status, remark) VALUES (205001, 205, 'ICON', '/develop/page/bootstrap/icon', 2, 1, '0', null, 'menu_nav_sub_bootstrap_icon', null, '0', null);
 INSERT INTO snowy.snowy_sys_resc (resc_id, resc_pid, resc_name, resc_url, resc_level, resc_sort, resc_type, resc_icon_name, resc_html_id, create_time, enable_status, remark) VALUES (205002, 205, 'Panel', '/develop/page/bootstrap/panel', 2, 1, '0', null, 'menu_nav_sub_bootstrap_panel', null, '0', null);
 INSERT INTO snowy.snowy_sys_resc (resc_id, resc_pid, resc_name, resc_url, resc_level, resc_sort, resc_type, resc_icon_name, resc_html_id, create_time, enable_status, remark) VALUES (205003, 205, 'DataTable', '/develop/page/bootstrap/dataTable', 2, 1, '0', null, 'menu_nav_sub_bootstrap_dataTable', null, '0', null);
+
+drop table if exists snowy.snowy_sys_role;
 CREATE TABLE snowy.snowy_sys_role
 (
     role_id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -1881,6 +1891,8 @@ CREATE TABLE snowy.snowy_sys_role
     create_time datetime COMMENT '创建时间',
     enable_statue char(1) DEFAULT '0' COMMENT '是否停用 默认：0 停用：1'
 );
+
+drop table if exists snowy.snowy_sys_role_resc;
 CREATE TABLE snowy.snowy_sys_role_resc
 (
     id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -1891,6 +1903,8 @@ CREATE TABLE snowy.snowy_sys_role_resc
 );
 CREATE INDEX FK_Reference_1 ON snowy.snowy_sys_role_resc (resc_id);
 CREATE INDEX FK_Reference_2 ON snowy.snowy_sys_role_resc (role_id);
+
+drop table if exists snowy.snowy_sys_role_user;
 CREATE TABLE snowy.snowy_sys_role_user
 (
     id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -1901,6 +1915,8 @@ CREATE TABLE snowy.snowy_sys_role_user
 );
 CREATE INDEX FK_Reference_3 ON snowy.snowy_sys_role_user (role_id);
 CREATE INDEX FK_Reference_4 ON snowy.snowy_sys_role_user (user_id);
+
+drop table if exists snowy.snowy_user_info;
 CREATE TABLE snowy.snowy_user_info
 (
     user_id int(11) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,

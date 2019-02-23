@@ -63,7 +63,6 @@ function cleanProcess () {
 gulp.task('default',
     gulp.series(cleanProcess,
         gulp.parallel(concatSnowyCss, concatSnowyJs),
-        //
         gulp.parallel(compressSnowyJs,compressSnowyCss)
     )
 );

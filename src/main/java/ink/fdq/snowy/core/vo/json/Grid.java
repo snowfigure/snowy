@@ -22,8 +22,6 @@
 
 package ink.fdq.snowy.core.vo.json;
 
-import com.jfinal.plugin.activerecord.Record;
-
 import java.util.List;
 
 public class Grid {

@@ -79,6 +79,17 @@ var __IsFalse = function(object){
 
     return false;
 };
+
+var __randomString = function(length){
+    length = length || 32;
+    var $chars = '_ABCD_EFGH_IJKLMN_OPQRSTUVWX_YZabcdefgh_ijklmnopqrstu_vwxyz01234_56789';
+    var maxPos = $chars.length;
+    var string = '';
+    for (var idx = 0; idx < length; idx++) {
+        string += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return string;
+};
 var xMode = {
     primary : "primary",
     success :　"success",
@@ -261,15 +272,232 @@ $.extend(Panel.prototype,{
 
 
 });
+
+/**
+ var DataTable = function(id){
+    this.id = id;
+    this.component_id = {
+
+search_ctn_id : this.random_id + "_simple_search",
+    table_ctn_id  : this.random_id + "_table",
+    pagination_ctn_id : this.random_id + "_pagination",
+    pagination : {
+    pageSelect_id :this.id + "_pagination"+ "_pageSelect",
+        refresh_id : this.id + "_pagination" + "_refresh",
+        pageSizeSelect_id : this.id + "_pagination" + "_pageSizeSelect",
+        totalItems_id : this.id + "_pagination" + "_totalItems",
+        gotoPage_id : his.id + "_pagination" + "_gotoPage"
+    }
+};
+this.dataTablePara;
+};
+ */
 var DataTable = function(id){
     this.id = id;
+    this.component_id = {
+        btn_ctn_id : __randomString(32) ,
+        search_ctn_id : __randomString(32) ,
+        table_ctn_id  : __randomString(32) ,
+        pagination_ctn_id : __randomString(32) ,
+        pagination : {
+            pageSelect_id : __randomString(32) ,
+            refresh_id : __randomString(32) ,
+            pageSizeSelect_id : __randomString(32) ,
+            totalItems_id : __randomString(32) ,
+            gotoPage_id : __randomString(32)
+        }
+    };
+
+    this.dataTablePara;
 };
 
 $.extend(DataTable.prototype,{
-    init : function(){
+    init : function(dataTablePara){
+        var that = this;
+        that.dataTablePara = dataTablePara;
+        that.initHtmlFrame();
+        that.initTableBodyFrame();
+        that.initPaginationBodyFrame();
+
+        that.__fillTableThead();
+        that.__fillTableBody();
         return this;
+    },
+
+    initHtmlFrame : function(){
+
+        var that = this;
+        var htmlArr = [];
+
+        htmlArr.push(String.format("<div class='col-sm-9' style='padding-left:0' id='{0}'></div>", that.component_id.btn_ctn_id));
+        htmlArr.push(String.format("<div class='col-sm-3' style='padding-left:0' id='{0}'></div>", that.component_id.search_ctn_id));
+        htmlArr.push(String.format("<div class='col-xs-12' style='padding-left:0' id='{0}'> </div>",that.component_id.table_ctn_id));
+        htmlArr.push(String.format("<div class='col-xs-12' style='padding-left:0' id='{0}'> </div>", that.component_id.pagination_ctn_id));
+
+        $("#" + that.id).html(htmlArr.join(""));
+    },
+
+    initTableBodyFrame : function(){
+        var that = this;
+        var htmlArr = [];
+
+        htmlArr.push(String.format("<table class='table table-striped table-bordered table-hover table-condensed' id='{0}'>", that.component_id.table_ctn_id));
+        htmlArr.push(String.format("    <thead><tr></tr></thead>"));
+        htmlArr.push(String.format("<tbody></tbody>"));
+        htmlArr.push(String.format("</table>"));
+
+        $("#" + that.component_id.table_ctn_id).html(htmlArr.join(""));
+
+
+    },
+
+    __getTableCols : function(configKey){
+        var that = this;
+        if(__IsEmpty(that.dataTablePara)){
+            return undefined;
+        }
+        var tableCols = that.dataTablePara.tableCols;
+        if(__IsEmpty(tableCols)){
+            that.dataTablePara.tableCols = undefined;
+            return undefined;
+        }
+        var tableConfig = tableCols[configKey];
+        if(__IsEmpty(tableCols)){
+            that.dataTablePara.tableCols[configKey] = undefined;
+            return undefined;
+        }
+        return tableConfig;
+    },
+
+    __getTableConfig : function(configKey){
+        var that = this;
+        if(__IsEmpty(that.dataTablePara)){
+            return undefined;
+        }
+        var tableConfig = that.dataTablePara.tableConfig;
+        if(__IsEmpty(tableConfig)){
+            that.dataTablePara.tableConfig = undefined;
+            return undefined;
+        }
+
+        var config = tableConfig[configKey];
+        if(__IsEmpty(config)){
+            that.dataTablePara.tableConfig[configKey] = undefined;
+            return undefined;
+        }
+        return config;
+    },
+
+    __isMultiSelect : function(){
+        var that = this;
+        return __IsTrue(that.__getTableConfig('multiSelect'));
+    },
+    __isShowSelect : function(){
+        var that = this;
+        return __IsTrue(that.__getTableConfig('showSelect'));
+    },
+
+
+    __fillTableThead : function(){
+        var that = this;
+        var theadCols = that.__getTableCols('theadCols');
+        if(__IsEmpty((theadCols))){
+            return;
+        }
+
+        var htmlArr = [];
+        var showSelect = __IsTrue(that.__isShowSelect()) ? '' : 'none';
+        htmlArr.push(String.format("<th  class='{0}' style='width:30px'></th>", showSelect));
+
+        for(var idx = 0; idx < theadCols.length; idx++){
+            var col = theadCols[idx];
+
+            var title = __IsEmpty(col.title) ? col.id : col.title;
+            var style = __IsEmpty(col.style) ? "" : col.style;
+            var visible = __IsTrue(col.visible) ? "" : "none";
+
+            htmlArr.push(String.format("<th class='{0}' style='{1}'>{2}</th>", visible, style, title));
+
+        }
+
+        $("#" + that.component_id.table_ctn_id + " thead > tr ").html(htmlArr.join(""));
+    },
+
+    __fillTableBody : function(){
+        var that = this;
+        var tbodyCols  = that.__getTableCols('tbodyCols');
+        if(__IsEmpty((tbodyCols))){
+            return;
+        }
+        var theadCols = that.__getTableCols('theadCols');
+        if(__IsEmpty((theadCols))){
+            return;
+        }
+
+        if( "url" === tbodyCols.mode){
+            var url = tbodyCols.url;
+            $.ajax({
+                type: "post",
+                url: url,
+                cache:false,
+                async:false,
+                success: function(data){
+                    tbodyCols.data = data;
+                }
+            });
+        }
+
+
+        var htmlArr = [];
+        var showSelect = __IsTrue(that.__isShowSelect()) ? '' : 'none';
+        var multiSelect = __IsTrue(that.__isMultiSelect()) ? 'checkbox' : 'radio';
+        var primaryKey = that.__getTableConfig('primaryKey');
+        var randomKey =  __randomString(8);
+
+        that.dataTablePara.tableConfig['randomKey'] = randomKey;
+
+        var rows = tbodyCols.data.rows;
+        if(__IsEmpty(rows)){
+            return;
+        }
+        for(var idx = 0; idx < rows.length; idx++){
+            var row = rows[idx];
+            var pkValue = row[primaryKey];
+            var rkValue = __randomString(32);
+            row[randomKey] = rkValue;
+            htmlArr.push(String.format("<tr {0}='{2}' {1}='{3}'>", primaryKey, pkValue, randomKey, rkValue));
+            htmlArr.push(String.format("<th  class='{0}' style='width:30px'><input type='{1}'></th>",showSelect, multiSelect));
+
+            for(var colIdx = 0; colIdx < theadCols.length; colIdx++){
+                var col = theadCols[colIdx];
+                var colValue = row[col.id];
+                var formatFunc = col.formatFunc;
+                var style = __IsEmpty(col.style) ? "" : col.style;
+                colValue = __IsEmpty(formatFunc) ? colValue : formatFunc(row);
+                htmlArr.push(String.format("<th  class='{0}' style='{1}'>{2}</th>",showSelect, style, colValue));
+            }
+
+            htmlArr.push("</tr>");
+        }
+
+        $("#" + that.component_id.table_ctn_id + " tbody ").html(htmlArr.join(""));
+    },
+
+    initPaginationBodyFrame : function(){
+        var that = this;
+        var htmlArr = [];
+
+        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.pageSelect_id));
+        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.refresh_id));
+        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.pageSizeSelect_id));
+        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.totalItems_id));
+        htmlArr.push(String.format("<ul class='pagination' id='{0}'></ul>", that.component_id.pagination.gotoPage_id));
+
+        $("#" + that.component_id.pagination_ctn_id).html(htmlArr.join(""));
     }
 });
+
+
 /**
  *  JSON 定义
  * {
@@ -303,17 +531,32 @@ $.extend(DataTable.prototype,{
 
 var NavBar = function(id, url){
     this.id = id;
+    this.nav_bar_header_id = this.id + "-header";
+    this.nav_bar_menu_id = this.id + "-menu";
+    this.nav_bar_footer_id = this.id + "-footer";
     this.url = url;
+    this.invalid_id = "__nav_bar_ignore_id__";
 };
 
 $.extend(NavBar.prototype,{
     init : function(){
         var that = this;
+        that.initHtmlFrame(that);
         /** 初始化HTML*/
         that.initHtml(that);
 
     },
 
+    initHtmlFrame : function(that){
+        var htmlArr = [];
+
+        htmlArr.push(String.format("<div id='{0}'></div>", that.nav_bar_header_id));
+        htmlArr.push(String.format("<div id='{0}'></div>", that.nav_bar_menu_id));
+        htmlArr.push(String.format("<div id='{0}'></div>", that.nav_bar_footer_id));
+
+        var html = htmlArr.join("");
+        $("#" + that.id).html(html);
+    },
     /**
      * 初始化html
      */
@@ -321,6 +564,7 @@ $.extend(NavBar.prototype,{
         $.ajax({
             type:"POST",
             url : that.url,
+            async:false,
             cache : false,
             dataType : "json",
             success: function (data) {
@@ -338,8 +582,8 @@ $.extend(NavBar.prototype,{
                         menuHtml.push(String.format("<li id='{0}'><div><a href='{1}' class='hover'><span class='nav-bar-left-span {2}'></span> {3}</a></div></li>",
                             main.id, main.url, main.iconClass, main.name));
                     }else{
-                        menuHtml.push(String.format("<li><div class='nav-bar-parent' id='{0}' class=''><span class='nav-bar-left-span {1}'></span> {2} <span class='nav-bar-right-span glyphicon glyphicon-chevron-down'></span></div><ul class='sub-nav-bar none'>",
-                            main.id + "_" + i_main, main.iconClass, main.name));
+                        menuHtml.push(String.format("<li id='{0}'><div class='nav-bar-parent' class=''><span class='nav-bar-left-span {1}'></span> {2} <span class='nav-bar-right-span glyphicon glyphicon-chevron-down'></span></div><ul class='sub-nav-bar none'>",
+                            main.id , main.iconClass, main.name));
                         var subMenu = main.subMenu;
                         for(var j_main = 0; j_main < subMenu.length; j_main++){
                             var sub = subMenu[j_main];
@@ -354,7 +598,7 @@ $.extend(NavBar.prototype,{
 
                 menuHtml.push("</ul>");
                 var html = menuHtml.join("");
-                $("#" + that.id).html(html);
+                $("#" + that.nav_bar_menu_id).html(html);
 
                 /** 绑定点击操作*/
                 that._bindTabsClick(that);
@@ -423,7 +667,7 @@ $.extend(NavBar.prototype,{
 
     _bindTabsClick : function(that){
 
-        $("#" + that.id + " ul").children("li").each(function(){
+        $("#" + that.nav_bar_menu_id + " ul").children("li").each(function(){
             $(this).click(function(){
                 var click_node_this = this;
                 var click_node = $(click_node_this);
@@ -442,9 +686,28 @@ $.extend(NavBar.prototype,{
 
             });
             /*** Click function End**/
-
-
         });
+
+    },
+
+    selectMenu : function(that, nav_id, nav_pid){
+        if(that.invalid_id === nav_pid){
+            var node_this    = "#" + that.nav_bar_menu_id + " #" + nav_id + " > div";
+            $(node_this).addClass("nav-bar-current");
+
+        }else{
+            var node_p_this    = "#" + that.nav_bar_menu_id + " #" + nav_pid + " > div";
+            var node_this    = "#" + that.nav_bar_menu_id + " #" + nav_id + " > div";
+            var node_ul_this = "#" + that.nav_bar_menu_id + " #" + nav_pid + " > ul";
+            $(node_p_this).addClass("nav-bar-current");
+            $(node_this).addClass("sub-nav-bar-current");
+
+            $(node_ul_this).slideDown(function(){
+                $(this).removeClass("none");
+                $(this).addClass("display");
+            });
+        }
+
 
     }
 
