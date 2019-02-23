@@ -28,8 +28,8 @@
 <link rel="stylesheet" type="text/css" media="screen and (max-width:960px)" href="${Server}/assets/_dev/snowy/css/max-960/default-960.css?${ResVersion}">
 <link rel="stylesheet" type="text/css" media="screen and (max-width:960px)" href="${Server}/assets/_dev/snowy/css/max-960/nav-bar-960.css?${ResVersion}">
 
-<link rel="stylesheet" type="text/css" media="screen and (max-width:960px)" href="${Server}/assets/_dev/snowy/css/max-480/default-480.css?${ResVersion}">
-<link rel="stylesheet" type="text/css" media="screen and (max-width:960px)" href="${Server}/assets/_dev/snowy/css/max-480/nav-bar-480.css?${ResVersion}">
+<link rel="stylesheet" type="text/css" media="screen and (max-width:480px)" href="${Server}/assets/_dev/snowy/css/max-480/default-480.css?${ResVersion}">
+<link rel="stylesheet" type="text/css" media="screen and (max-width:480px)" href="${Server}/assets/_dev/snowy/css/max-480/nav-bar-480.css?${ResVersion}">
 
 <#else>
 <link rel="stylesheet" type="text/css" href="${Server}/assets/lib/snowy/css/snowy.${dev_min_mode}css?${ResVersion}">
