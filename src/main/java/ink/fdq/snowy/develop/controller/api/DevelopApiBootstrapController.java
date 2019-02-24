@@ -33,9 +33,7 @@ public class DevelopApiBootstrapController extends DevelopApiBaseController{
     DevelopBootstrapService bootstrapService;
 
     public void iconPage(){
-        PagePara para = new PagePara();
-        para.setPageNumber(1);
-        para.setPageSize(20);
+        PagePara para  = getPagePara();
         Page<SysIcon> page = bootstrapService.paginate(para);
 
         renderJson(page);

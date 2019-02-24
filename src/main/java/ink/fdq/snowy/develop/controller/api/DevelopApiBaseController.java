@@ -22,9 +22,19 @@
 
 package ink.fdq.snowy.develop.controller.api;
 
+import ink.fdq.snowy.core.vo.json.PagePara;
 import ink.fdq.snowy.develop.controller.DevelopController;
 
 public class DevelopApiBaseController extends DevelopController {
 
+    protected PagePara getPagePara(){
+        int pageSize = getParaToInt("pageSize", 10);
+        int pageNumber = getParaToInt("pageNumber", 1);
+        PagePara para  = new PagePara();
+        para.setPageNumber(pageNumber);
+        para.setPageSize(pageSize);
+
+        return para;
+    }
 
 }

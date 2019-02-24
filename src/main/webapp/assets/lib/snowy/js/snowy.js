@@ -309,6 +309,12 @@ var DataTable = function(id){
     };
 
     this.dataTablePara;
+    this.dataTablePage = {
+        totalRow:0,
+        pageNumber:1,
+        totalPage:0,
+        pageSize:10
+    };
 };
 
 $.extend(DataTable.prototype,{
@@ -440,10 +446,15 @@ $.extend(DataTable.prototype,{
             $.ajax({
                 type: "post",
                 url: url,
+                data : that.dataTablePage,
                 cache:false,
                 async:false,
                 success: function(data){
                     tbodyCols.data = data;
+                    that.dataTablePage.totalRow = data.totalRow;
+                    that.dataTablePage.pageNumber = data.pageNumber;
+                    that.dataTablePage.totalPage = data.totalPage;
+                    that.dataTablePage.pageSize = data.pageSize;
                 }
             });
         }
@@ -473,11 +484,6 @@ $.extend(DataTable.prototype,{
             row['randomKey'] = randomKey;
             row[randomKey] = rkValue;
 
-            /*var primaryKey = that.__getTableConfig('primaryKey');
-            that.dataTablePara.tableConfig['randomKey'] = randomKey;
-            var pkValue = row[primaryKey];
-            htmlArr.push(String.format("<tr {0}='{1}' {2}='{3}'>", primaryKey, pkValue, randomKey, rkValue));*/
-
             htmlArr.push(String.format("<tr {0}='{1}'>", randomKey, rkValue));
             htmlArr.push(String.format("<td  class='{0}' style='width:30px'><input type='{1}'></td>",showSelect, multiSelect));
 
@@ -497,6 +503,23 @@ $.extend(DataTable.prototype,{
         $("#" + that.component_id.table_ctn_id + " tbody ").html(htmlArr.join(""));
     },
 
+    __getPageSize : function(){
+        var that = this;
+        var pageSizeSelect_id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id;
+
+        var value = $(pageSizeSelect_id + " select").find("option:selected").text();
+        return value;
+    },
+    __reloadDataTable : function(pageSize, pageNumber){
+        var that = this;
+        that.dataTablePage.pageSize = pageSize;
+        that.dataTablePage.pageNumber = pageNumber;
+
+        that.__loadData();
+        that.__fillTableThead();
+        that.__fillTableBody();
+        that.__fillTablePagination();
+    },
     /**
      * @Todo 页面处理
      * @private
@@ -504,21 +527,69 @@ $.extend(DataTable.prototype,{
     ____fillTablePagination__pageSelect : function(){
         var that = this;
         var htmlArr = [];
+        var tbodyCols  = that.__getTableCols('tbodyCols');
+        if(__IsEmpty((tbodyCols)) || __IsEmpty(tbodyCols.data) ){
+            return;
+        }
 
-        var temp =
-        "<li class='disabled'><a href='#'>&lt;&lt;</a></li>" +
-        "<li class='disabled'><a href='#'> &lt; </a></li>" +
-        "<li class='active'><a href='#'>1</a></li>" +
-        "<li><a href='#'>2</a></li>" +
-        "<li><a href='#'>3</a></li>" +
-        "<li><a href='#'>4</a></li>" +
-        "<li><a href='#'>5</a></li>" +
-        "<li><a href='#'>6</a></li>" +
-        "<li><a href='#'> &gt; </a></li>" +
-        "<li><a href='#'>&gt;&gt;</a></li>"
+        /* 总页数 */
+        var totalPage = tbodyCols.data.totalPage;
+        /* 当前页码 */
+        var pageNumber = tbodyCols.data.pageNumber;
+        /* 每次显示页码个数 */
+        var maxShowPage = 5;
+        var TP = totalPage;
+        var MSP = maxShowPage;
 
-        htmlArr.push(temp);
-        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSelect_id).html(htmlArr.join(""));
+        /* 页码个数的中间值，向上取整*/
+        var HMSP = MSP % 2 === 0 ? MSP / 2 : (MSP + 1) / 2;
+        var PN = pageNumber;
+
+        /*开始页*/
+        var SP = HMSP + 1 <= PN ?  PN - HMSP + 1 : 1;
+        /*结束页*/
+        var EP = MSP + SP <= TP ? MSP + SP - 1 : TP;
+
+        /*前一页、首页按钮是否可点击*/
+        var enablePre = PN === 1 ? 'disabled' : '';
+        /*下一页、尾页按钮是否可点击*/
+        var enableNext = PN === TP ? 'disabled' : '';
+
+        /*前一页的页码*/
+        var prePage = PN === 1 ? '1' : PN - 1;
+        /*后一页的页码*/
+        var nextPage = PN === TP ? TP : PN + 1;
+
+        /* 页码列表的html组装 */
+        htmlArr.push(String.format("<li class='{0}' page='{1}'><a >&lt;&lt;</a></li>", enablePre, "1"));
+        htmlArr.push(String.format("<li class='{0}' page='{1}'><a > &lt; </a></li>", enablePre, prePage));
+        for(var P = SP; P <= EP ; P++){
+            var enableActive = PN === P ? 'active' : '';
+            htmlArr.push(String.format("<li class='{0}' page='{1}'><a >{2}</a></li>" , enableActive, P, P));
+        }
+        htmlArr.push(String.format("<li class='{0}' page='{1}'><a > &gt; </a></li>", enableNext, nextPage));
+        htmlArr.push(String.format("<li class='{0}' page='{1}'><a >&gt;&gt;</a></li>", enableNext, totalPage));
+
+        /*指定dom节点下填充html*/
+        var id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSelect_id;
+        $(id).html(htmlArr.join(""));
+
+        /*每个 li > a 标签添加一个点击操作*/
+        $(id).children('li').each(function(){
+            var li_dom = this;
+            $(li_dom).children('a').each(function(){
+                var a_dom = this;
+                $(a_dom).click(function(){
+                    /* 获取当前页码*/
+                    var pageNumber = $(this).parent().attr('page');
+                    /* 获取分页大小*/
+                    var pageSize = that.__getPageSize();
+                    /* 重新加载数据 */
+                    that.__reloadDataTable(pageSize, pageNumber);
+                });
+            });
+        })
+
     },
     /**
      * @Todo 刷新
@@ -556,7 +627,8 @@ $.extend(DataTable.prototype,{
             "</li>";
 
         htmlArr.push(temp);
-        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id).html(htmlArr.join(""));
+        var pageSizeSelect_id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id;
+        $(pageSizeSelect_id).html(htmlArr.join(""));
     },
     ____fillTablePagination__totalItems: function(){
         var that = this;
