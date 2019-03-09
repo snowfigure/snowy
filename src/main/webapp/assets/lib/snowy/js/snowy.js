@@ -520,6 +520,25 @@ $.extend(DataTable.prototype,{
         that.__fillTableBody();
         that.__fillTablePagination();
     },
+
+    ___pageNumBindClick : function(that,id){
+        /*每个 li > a 标签添加一个点击操作*/
+        $(id).children('li').each(function(){
+            var li_dom = this;
+            $(li_dom).children('a').each(function(){
+                var a_dom = this;
+                $(a_dom).click(function(){
+                    /* 获取当前页码*/
+                    var pageNumber = $(this).parent().attr('page');
+                    /* 获取分页大小*/
+                    var pageSize = that.__getPageSize();
+                    /* 重新加载数据 */
+                    that.__reloadDataTable(pageSize, pageNumber);
+                });
+            });
+        });
+    },
+
     /**
      * @Todo 页面处理
      * @private
@@ -547,6 +566,7 @@ $.extend(DataTable.prototype,{
 
         /*开始页*/
         var SP = HMSP + 1 <= PN ?  PN - HMSP + 1 : 1;
+        SP = SP + MSP <= TP ? SP : TP - MSP + 1;
         /*结束页*/
         var EP = MSP + SP <= TP ? MSP + SP - 1 : TP;
 
@@ -574,6 +594,11 @@ $.extend(DataTable.prototype,{
         var id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSelect_id;
         $(id).html(htmlArr.join(""));
 
+        that.___pageNumBindClick(that, id);
+
+    },
+
+    ___pageNumBindClick : function(that,id){
         /*每个 li > a 标签添加一个点击操作*/
         $(id).children('li').each(function(){
             var li_dom = this;
@@ -588,8 +613,7 @@ $.extend(DataTable.prototype,{
                     that.__reloadDataTable(pageSize, pageNumber);
                 });
             });
-        })
-
+        });
     },
     /**
      * @Todo 刷新
@@ -598,10 +622,18 @@ $.extend(DataTable.prototype,{
     ____fillTablePagination__refresh: function(){
         var that = this;
         var htmlArr = [];
+        var tbodyCols  = that.__getTableCols('tbodyCols');
+        if(__IsEmpty((tbodyCols)) || __IsEmpty(tbodyCols.data) ){
+            return;
+        }
+        /* 当前页码 */
+        var pageNumber = tbodyCols.data.pageNumber;
 
-        var temp = "<li><span class='glyphicon glyphicon-refresh' style='top: 0'></span></li>";
+        var temp = String.format("<li page='{0}'><a><span class='glyphicon glyphicon-refresh' style='top: 0'></span></a></li>", pageNumber);
         htmlArr.push(temp);
-        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id).html(htmlArr.join(""));
+        var id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id;
+        $(id).html(htmlArr.join(""));
+        that.___pageNumBindClick(that, id);
     },
 
     /**
