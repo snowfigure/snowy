@@ -336,12 +336,12 @@ $.extend(DataTable.prototype,{
 
         var that = this;
         var htmlArr = [];
-
+        htmlArr.push("<div>");
         htmlArr.push(String.format("<div class='col-sm-9' style='padding-left:0' id='{0}'></div>", that.component_id.btn_ctn_id));
         htmlArr.push(String.format("<div class='col-sm-3' style='padding-left:0' id='{0}'></div>", that.component_id.search_ctn_id));
-        htmlArr.push(String.format("<div class='col-xs-12' style='padding-left:0' id='{0}'> </div>",that.component_id.table_ctn_id));
+        htmlArr.push(String.format("<div class='col-xs-12' style='padding-left:0;overflow-x: scroll;' id='{0}'> </div>",that.component_id.table_ctn_id));
         htmlArr.push(String.format("<div class='col-xs-12' style='padding-left:0' id='{0}'> </div>", that.component_id.pagination_ctn_id));
-
+        htmlArr.push("</div>");
         $("#" + that.id).html(htmlArr.join(""));
     },
 
@@ -354,7 +354,7 @@ $.extend(DataTable.prototype,{
         htmlArr.push(String.format("<tbody></tbody>"));
         htmlArr.push(String.format("</table>"));
 
-        $("#" + that.component_id.table_ctn_id).html(htmlArr.join(""));
+        $("#" + that.id + " #" + that.component_id.table_ctn_id).html(htmlArr.join(""));
 
 
     },
@@ -428,7 +428,7 @@ $.extend(DataTable.prototype,{
 
         }
 
-        $("#" + that.component_id.table_ctn_id + " thead > tr ").html(htmlArr.join(""));
+        $("#" + that.id + " #" + that.component_id.table_ctn_id + " thead > tr ").html(htmlArr.join(""));
     },
 
     /**
@@ -500,25 +500,45 @@ $.extend(DataTable.prototype,{
             htmlArr.push("</tr>");
         }
 
-        $("#" + that.component_id.table_ctn_id + " tbody ").html(htmlArr.join(""));
+        $("#" + that.id + " #" + that.component_id.table_ctn_id + " tbody ").html(htmlArr.join(""));
     },
 
     __getPageSize : function(){
         var that = this;
-        var pageSizeSelect_id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id;
+        var pageSizeSelect_id = "#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id;
 
         var value = $(pageSizeSelect_id + " select").find("option:selected").text();
         return value;
     },
+
+    ____reloadStart : function(that){
+        var id = "#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id;
+        $(id + "  span").removeClass("glyphicon glyphicon-refresh ");
+        $(id + "  img").removeClass("none");
+    },
+    ____reloadStop : function(that){
+        var id = "#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id;
+        $(id + "  span").addClass("glyphicon glyphicon-refresh");
+        $(id + "  img").addClass("none");
+    },
+
     __reloadDataTable : function(pageSize, pageNumber){
         var that = this;
         that.dataTablePage.pageSize = pageSize;
         that.dataTablePage.pageNumber = pageNumber;
-
         that.__loadData();
-        that.__fillTableThead();
-        that.__fillTableBody();
         that.__fillTablePagination();
+
+        that.____reloadStart(that);
+        setTimeout(function(){
+
+            that.__fillTableThead();
+            that.__fillTableBody();
+            that.____reloadStop(that);
+        }, 100);
+
+        
+
     },
 
     ___pageNumBindClick : function(that,id){
@@ -591,7 +611,7 @@ $.extend(DataTable.prototype,{
         htmlArr.push(String.format("<li class='{0}' page='{1}'><a >&gt;&gt;</a></li>", enableNext, totalPage));
 
         /*指定dom节点下填充html*/
-        var id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSelect_id;
+        var id = "#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSelect_id;
         $(id).html(htmlArr.join(""));
 
         that.___pageNumBindClick(that, id);
@@ -629,9 +649,9 @@ $.extend(DataTable.prototype,{
         /* 当前页码 */
         var pageNumber = tbodyCols.data.pageNumber;
 
-        var temp = String.format("<li page='{0}'><a><span class='glyphicon glyphicon-refresh' style='top: 0'></span></a></li>", pageNumber);
+        var temp = String.format("<li page='{0}'><a><span class='glyphicon glyphicon-refresh' style='top: 0'><img src='/assets/images/loading/5-121204193949.gif' class='none'></span></a></li>", pageNumber);
         htmlArr.push(temp);
-        var id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id;
+        var id = "#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.refresh_id;
         $(id).html(htmlArr.join(""));
         that.___pageNumBindClick(that, id);
     },
@@ -659,8 +679,22 @@ $.extend(DataTable.prototype,{
             "</li>";
 
         htmlArr.push(temp);
-        var pageSizeSelect_id = "#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id;
+        var pageSizeSelect_id = "#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.pageSizeSelect_id;
         $(pageSizeSelect_id).html(htmlArr.join(""));
+
+        var tbodyCols  = that.__getTableCols('tbodyCols');
+        if(__IsEmpty((tbodyCols)) || __IsEmpty(tbodyCols.data) ){
+            return;
+        }
+
+        var pageSize = tbodyCols.data.pageSize;
+        $(pageSizeSelect_id + " select").val(pageSize);
+        $(pageSizeSelect_id + " select").change(function(){
+            var pageNumber = 1;
+            var pageSize = $(this).val();
+            /* 重新加载数据 */
+            that.__reloadDataTable(pageSize, pageNumber);
+        });
     },
     ____fillTablePagination__totalItems: function(){
         var that = this;
@@ -674,7 +708,7 @@ $.extend(DataTable.prototype,{
 
         var temp = String.format("<li><span>共{0} 条</span></li><li><span>共 {1} 页</span></li>", totalRow, totalPage);
         htmlArr.push(temp);
-        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.totalItems_id).html(htmlArr.join(""));
+        $("#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.totalItems_id).html(htmlArr.join(""));
     },
 
     /**
@@ -690,7 +724,35 @@ $.extend(DataTable.prototype,{
             "<li><span><input type='text' class='form-control' value='1'></span></li>" +
             "<li><span style='padding:6px 3px' >页</span></li>";
         htmlArr.push(temp);
-        $("#" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.gotoPage_id).html(htmlArr.join(""));
+        var id = "#" + that.id + " #" + that.component_id.pagination_ctn_id + " #" + that.component_id.pagination.gotoPage_id;
+        $(id).html(htmlArr.join(""));
+
+        var tbodyCols  = that.__getTableCols('tbodyCols');
+        if(__IsEmpty((tbodyCols)) || __IsEmpty(tbodyCols.data) ){
+            return;
+        }
+
+        $(id + " input").val(tbodyCols.data.pageNumber);
+        $(id + " input").bind('keypress',function(event){
+            if(event.keyCode == "13"){
+                var pageNumber = parseInt($(this).val());
+                if(isNaN(pageNumber) || pageNumber+ "" !== $(this).val()){
+                    $(this).val(tbodyCols.data.pageNumber);
+                    return;
+                }
+                if(pageNumber > tbodyCols.data.totalPage){
+                    pageNumber = tbodyCols.data.totalPage;
+                    $(this).val(pageNumber);
+                }
+                if(pageNumber <=0 ){
+                    pageNumber = 1;
+                    $(this).val(pageNumber);
+                }
+                var pageSize = that.__getPageSize();
+                /* 重新加载数据 */
+                that.__reloadDataTable(pageSize, pageNumber);
+            }
+        });
     },
 
     __fillTablePagination : function(){
@@ -713,7 +775,7 @@ $.extend(DataTable.prototype,{
         htmlArr.push(String.format("<ul class='pagination pageTotalItems' id='{0}'></ul>", that.component_id.pagination.totalItems_id));
         htmlArr.push(String.format("<ul class='pagination pageGotoPage' id='{0}'></ul>", that.component_id.pagination.gotoPage_id));
 
-        $("#" + that.component_id.pagination_ctn_id).html(htmlArr.join(""));
+        $("#" + that.id + " #" + that.component_id.pagination_ctn_id).html(htmlArr.join(""));
     }
 });
 
