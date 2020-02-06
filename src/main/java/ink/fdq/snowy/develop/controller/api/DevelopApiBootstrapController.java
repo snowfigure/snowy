@@ -26,9 +26,10 @@ import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
 import ink.fdq.snowy.core.model.table.SysIcon;
 import ink.fdq.snowy.core.vo.json.PagePara;
+import ink.fdq.snowy.develop.controller.api.DevelopApiBaseController;
 import ink.fdq.snowy.develop.service.DevelopBootstrapService;
 
-public class DevelopApiBootstrapController extends DevelopApiBaseController{
+public class DevelopApiBootstrapController extends DevelopApiBaseController {
     @Inject
     DevelopBootstrapService bootstrapService;
 

@@ -1,0 +1,99 @@
+{
+  "subMenu": [
+    {
+      "subMenu": null,
+      "name": "主页",
+      "pid": null,
+      "id": "menu_nav_index",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-home"
+    },
+    {
+      "subMenu": null,
+      "name": "后台",
+      "pid": null,
+      "id": "menu_nav_main",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-th-large"
+    },
+    {
+      "subMenu": null,
+      "name": "新建",
+      "pid": null,
+      "id": "menu_nav_new",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-pencil"
+    },
+    {
+      "subMenu": [
+        {
+          "subMenu": null,
+          "name": "文章",
+          "pid": null,
+          "id": "menu_nav_sub_manage_article",
+          "url": "#",
+          "iconClass": ""
+        },
+        {
+          "subMenu": null,
+          "name": "草稿",
+          "pid": null,
+          "id": "menu_nav_sub_manage_draft",
+          "url": "#",
+          "iconClass": "null"
+        },
+        {
+          "subMenu": null,
+          "name": "评论",
+          "pid": null,
+          "id": "menu_nav_sub_manage_comment",
+          "url": "#",
+          "iconClass": "null"
+        }
+      ],
+      "name": "管理",
+      "pid": null,
+      "id": "menu_nav_manage",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-briefcase"
+    },
+    {
+      "subMenu": [
+        {
+          "subMenu": null,
+          "name": "偏好设置",
+          "pid": null,
+          "id": "menu_nav_sub_setting_preference",
+          "url": "#",
+          "iconClass": "null"
+        },
+        {
+          "subMenu": null,
+          "name": "其它设置",
+          "pid": null,
+          "id": "menu_nav_sub_setting_others",
+          "url": "#",
+          "iconClass": "null"
+        }
+      ],
+      "name": "配置",
+      "pid": null,
+      "id": "menu_nav_setting",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-wrench"
+    },
+    {
+      "subMenu": null,
+      "name": "工具",
+      "pid": null,
+      "id": "menu_nav_devTool",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-console"
+    }
+  ],
+  "name": "",
+  "pid": null,
+  "id": "",
+  "url": "",
+  "iconClass": ""
+}

@@ -22,7 +22,6 @@
 
 package ink.fdq.snowy.core.factory;
 
-import com.jfinal.plugin.activerecord.Page;
 import ink.fdq.snowy.core.model.table.SysResc;
 import ink.fdq.snowy.core.service.MenuService;
 import ink.fdq.snowy.core.service.base.SysRescService;

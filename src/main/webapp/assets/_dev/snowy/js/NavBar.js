@@ -62,7 +62,7 @@ $.extend(NavBar.prototype,{
      */
     initHtml : function(that){
         $.ajax({
-            type:"POST",
+            type:"GET",
             url : that.url,
             async:false,
             cache : false,

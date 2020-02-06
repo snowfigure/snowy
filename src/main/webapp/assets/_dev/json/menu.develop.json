@@ -1,0 +1,75 @@
+{
+  "subMenu": [
+    {
+      "subMenu": null,
+      "name": "主页",
+      "pid": null,
+      "id": "menu_nav_index",
+      "url": "/develop/page/main",
+      "iconClass": "glyphicon glyphicon-home"
+    },
+    {
+      "subMenu": null,
+      "name": "管理台",
+      "pid": null,
+      "id": "menu_nav_main",
+      "url": "/admin/page/main",
+      "iconClass": "glyphicon glyphicon-th-large"
+    },
+    {
+      "subMenu": [
+        {
+          "subMenu": null,
+          "name": "ICON",
+          "pid": null,
+          "id": "menu_nav_sub_bootstrap_icon",
+          "url": "/develop/page/bootstrap/icon",
+          "iconClass": "null"
+        },
+        {
+          "subMenu": null,
+          "name": "Panel",
+          "pid": null,
+          "id": "menu_nav_sub_bootstrap_panel",
+          "url": "/develop/page/bootstrap/panel",
+          "iconClass": "null"
+        },
+        {
+          "subMenu": null,
+          "name": "DataTable",
+          "pid": null,
+          "id": "menu_nav_sub_bootstrap_dataTable",
+          "url": "/develop/page/bootstrap/dataTable",
+          "iconClass": "null"
+        }
+      ],
+      "name": "Bootstrap",
+      "pid": null,
+      "id": "menu_nav_bootstrap",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-asterisk"
+    },
+    {
+      "subMenu": [
+        {
+          "subMenu": null,
+          "name": "地图数据可视化",
+          "pid": null,
+          "id": "menu_nav_sub_3rdPlugin_essjksh",
+          "url": "/develop/page/3rdplugin/essjksh",
+          "iconClass": "null"
+        }
+      ],
+      "name": "Third Plugin",
+      "pid": null,
+      "id": "menu_nav_3rdPlugin",
+      "url": "#",
+      "iconClass": "glyphicon glyphicon-asterisk"
+    }
+  ],
+  "name": "",
+  "pid": null,
+  "id": "",
+  "url": "",
+  "iconClass": ""
+}
